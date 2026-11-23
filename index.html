@@ -120,18 +120,18 @@
     }
 
     /* ==========================================================================
-       MICRO-ANIMATED BUTTONS
+       MICRO-ANIMATED BUTTONS (Generous Hit Targets for Mobile & Desktop)
        ========================================================================== */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      height: 44px;
-      padding: 0 20px;
+      min-height: 46px;
+      padding: 0 22px;
       border-radius: var(--r-pill);
       font-weight: 700;
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       letter-spacing: -0.01em;
       text-decoration: none;
       border: 1.5px solid transparent;
@@ -273,12 +273,12 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      height: 38px;
-      padding: 0 14px;
+      height: 40px;
+      padding: 0 15px;
       border-radius: var(--r-pill);
       background: var(--white);
       border: 1.5px solid var(--border);
-      font-size: 0.82rem;
+      font-size: 0.83rem;
       font-weight: 700;
       cursor: pointer;
       transition: transform 0.2s var(--spring), border-color 0.2s ease;
@@ -301,8 +301,8 @@
     }
 
     .menu-btn {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 10px;
       border: 1.5px solid var(--border);
       background: var(--white);
@@ -335,7 +335,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 10px 12px;
+      padding: 11px 12px;
       border-radius: var(--r-sm);
       text-decoration: none;
       font-weight: 700;
@@ -346,14 +346,14 @@
     .mobile-drawer-nav a:hover { background: var(--cream); }
 
     /* ==========================================================================
-       HERO SECTION (3-Second Clarity, Rich Editorial Polish)
+       HERO SECTION (3-Second Clarity, Zero Duplicate Text)
        ========================================================================== */
     .hero {
-      padding: 18px 0 28px;
+      padding: 18px 0 24px;
     }
 
     @media (min-width: 860px) {
-      .hero { padding: 26px 0 38px; }
+      .hero { padding: 26px 0 32px; }
     }
 
     .hero-card {
@@ -369,7 +369,7 @@
     @media (min-width: 860px) {
       .hero-card {
         grid-template-columns: 1.15fr 0.85fr;
-        min-height: 390px;
+        min-height: 380px;
       }
     }
 
@@ -389,8 +389,7 @@
       font-family: var(--font-mr);
       font-size: 0.85rem;
       font-weight: 700;
-      color: rgba(255, 255, 255, 0.84);
-      letter-spacing: 0.01em;
+      color: rgba(255, 255, 255, 0.86);
     }
 
     .hero-h1 {
@@ -430,7 +429,7 @@
 
     .hero-visual {
       position: relative;
-      min-height: 230px;
+      min-height: 220px;
       background: var(--green-deep);
     }
 
@@ -470,30 +469,36 @@
       color: var(--muted);
     }
 
-    .google-pill {
+    .open-pill {
       background: var(--green);
       color: var(--white);
       padding: 6px 11px;
       border-radius: 10px;
       font-weight: 700;
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       white-space: nowrap;
     }
 
     /* ==========================================================================
-       LEAF-CAFE INSPIRED CIRCULAR ARC CAROUSEL (Menu Highlights Deck)
-       Cards emerge from bottom circular motion, fanning smoothly on swipe/tap
+       DEDICATED ANIMATED REVIEWS SECTION (Placed Above Popular Products)
        ========================================================================== */
-    .carousel-section {
-      padding: 36px 0 28px;
-      overflow: hidden;
+    .reviews-section {
+      padding: 28px 0 24px;
     }
 
-    .carousel-header {
-      text-align: center;
-      max-width: 580px;
-      margin: 0 auto 24px;
-      padding: 0 16px;
+    .reviews-top {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (min-width: 768px) {
+      .reviews-top {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
     }
 
     .eyebrow {
@@ -502,23 +507,167 @@
       text-transform: uppercase;
       letter-spacing: 0.08em;
       color: var(--orange);
-      margin-bottom: 6px;
+      margin-bottom: 4px;
     }
 
     .display-title {
       font-family: var(--font-display);
-      font-size: clamp(1.65rem, 4.2vw, 2.35rem);
+      font-size: clamp(1.55rem, 3.8vw, 2.15rem);
       font-weight: 800;
-      line-height: 1.12;
+      line-height: 1.14;
       color: var(--green);
       letter-spacing: -0.02em;
     }
 
-    /* Circular Arc Stage */
+    .rating-summary-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      padding: 10px 16px;
+      border-radius: var(--r-pill);
+      align-self: flex-start;
+    }
+
+    .rating-score {
+      font-family: var(--font-display);
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: var(--green);
+      line-height: 1;
+    }
+
+    .rating-stars {
+      color: var(--orange);
+      font-size: 0.92rem;
+      letter-spacing: 1px;
+      line-height: 1.1;
+    }
+
+    .rating-meta {
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 14px;
+    }
+
+    @media (min-width: 720px) {
+      .reviews-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+    }
+
+    .review-card {
+      background: var(--white);
+      border: 1.5px solid var(--border);
+      border-radius: var(--r-md);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      opacity: 0;
+      transform: translateY(22px) scale(0.97);
+      transition: opacity 0.6s var(--ease), transform 0.6s var(--spring), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .review-card.in-view {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    .review-card:hover {
+      border-color: var(--green);
+      transform: translateY(-4px);
+      box-shadow: 0 14px 28px rgba(13, 74, 51, 0.08);
+    }
+
+    .review-stars-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--orange);
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+
+    .review-badge {
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      background: var(--green-soft);
+      color: var(--green);
+      padding: 3px 9px;
+      border-radius: var(--r-pill);
+    }
+
+    .review-quote {
+      font-size: 0.87rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .reviewer-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+    }
+
+    .reviewer-avatar {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: var(--green);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 0.8rem;
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+    }
+
+    .reviewer-info strong {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--green);
+      line-height: 1.2;
+    }
+
+    .reviewer-info span {
+      font-size: 0.73rem;
+      color: var(--muted);
+    }
+
+    /* ==========================================================================
+       POPULAR PRODUCTS — COMPACT MOBILE & THUMB-FRIENDLY DESKTOP CIRCULAR ARC
+       ========================================================================== */
+    .popular-section {
+      padding: 28px 0 32px;
+      overflow: hidden;
+    }
+
+    .popular-header {
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 18px;
+      padding: 0 16px;
+    }
+
+    /* Compact Mobile Stage, Balanced Desktop Stage */
     .arc-stage {
       position: relative;
       width: 100%;
-      height: 455px;
+      height: 372px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -528,131 +677,118 @@
     }
 
     @media (min-width: 768px) {
-      .arc-stage { height: 480px; }
+      .arc-stage { height: 435px; }
     }
 
     .arc-card {
       position: absolute;
-      width: 286px;
+      width: 234px; /* Compact, proportional mobile card width */
       background: var(--white);
-      border-radius: 22px;
+      border-radius: 20px;
       border: 2px solid var(--border);
       overflow: hidden;
-      box-shadow: 0 14px 30px rgba(13, 74, 51, 0.08);
-      transform-origin: 50% 165%; /* Bottom pivot for true circular arc motion */
-      transition: transform 0.62s var(--spring), opacity 0.45s ease, border-color 0.3s ease, box-shadow 0.45s ease;
+      box-shadow: 0 12px 26px rgba(13, 74, 51, 0.08);
+      transform-origin: 50% 175%; /* Bottom circular pivot */
+      transition: transform 0.6s var(--spring), opacity 0.42s ease, border-color 0.25s ease, box-shadow 0.42s ease;
       cursor: pointer;
       will-change: transform, opacity;
     }
 
     @media (min-width: 768px) {
-      .arc-card { width: 320px; }
+      .arc-card { width: 300px; }
     }
 
     .arc-card.is-center {
       border-color: var(--green);
-      box-shadow: 0 26px 52px rgba(13, 74, 51, 0.22);
+      box-shadow: 0 22px 44px rgba(13, 74, 51, 0.2);
       cursor: default;
     }
 
     .arc-media {
       position: relative;
-      height: 220px;
+      height: 168px; /* Compact mobile image height */
       background: var(--green-deep);
       overflow: hidden;
     }
 
     @media (min-width: 768px) {
-      .arc-media { height: 238px; }
+      .arc-media { height: 210px; }
     }
 
     .arc-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transition: transform 0.6s var(--ease);
+      transition: transform 0.55s var(--ease);
     }
 
     .arc-card.is-center .arc-media img {
-      transform: scale(1.03);
+      transform: scale(1.04);
     }
 
     .arc-media::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(8, 50, 34, 0.72) 0%, rgba(8, 50, 34, 0.08) 50%, transparent 100%);
+      background: linear-gradient(to top, rgba(8, 50, 34, 0.72) 0%, rgba(8, 50, 34, 0.05) 55%, transparent 100%);
       pointer-events: none;
     }
 
     .arc-cat-pill {
       position: absolute;
-      top: 14px;
-      left: 14px;
+      top: 11px;
+      left: 11px;
       z-index: 2;
       background: rgba(13, 74, 51, 0.92);
       color: var(--white);
-      font-size: 0.68rem;
+      font-size: 0.64rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.06em;
-      padding: 5px 11px;
+      letter-spacing: 0.05em;
+      padding: 4px 10px;
       border-radius: var(--r-pill);
     }
 
     .arc-num-badge {
       position: absolute;
-      top: 14px;
-      right: 14px;
+      top: 11px;
+      right: 11px;
       z-index: 2;
-      width: 30px;
-      height: 30px;
+      width: 26px;
+      height: 26px;
       border-radius: 50%;
       background: var(--white);
       color: var(--green);
-      font-size: 0.74rem;
+      font-size: 0.7rem;
       font-weight: 800;
       display: grid;
       place-items: center;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.14);
-    }
-
-    .arc-status-label {
-      position: absolute;
-      bottom: 13px;
-      left: 14px;
-      z-index: 2;
-      font-size: 0.68rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.88);
-    }
-
-    .arc-card.is-center .arc-status-label {
-      color: #FFD166;
     }
 
     .arc-price-tag {
       position: absolute;
-      bottom: 10px;
-      right: 14px;
+      bottom: 9px;
+      right: 12px;
       z-index: 2;
       font-family: var(--font-display);
-      font-size: 1.35rem;
+      font-size: 1.22rem;
       font-weight: 800;
       color: var(--white);
       line-height: 1;
     }
 
     .arc-content {
-      padding: 18px 18px 20px;
+      padding: 14px 15px 15px;
       background: var(--white);
+    }
+
+    @media (min-width: 768px) {
+      .arc-content { padding: 16px 18px 18px; }
     }
 
     .arc-mr {
       font-family: var(--font-mr);
-      font-size: 0.78rem;
+      font-size: 0.74rem;
       font-weight: 700;
       color: var(--orange);
       display: block;
@@ -661,40 +797,45 @@
 
     .arc-title {
       font-family: var(--font-display);
-      font-size: 1.32rem;
+      font-size: 1.12rem;
       font-weight: 700;
       line-height: 1.18;
       color: var(--green);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
+    }
+
+    @media (min-width: 768px) {
+      .arc-title { font-size: 1.25rem; }
     }
 
     .arc-desc {
-      font-size: 0.82rem;
-      line-height: 1.46;
+      font-size: 0.78rem;
+      line-height: 1.42;
       color: var(--muted);
       display: -webkit-box;
       -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
 
     .arc-card-foot {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
+      gap: 8px;
     }
 
     .arc-unit {
-      font-size: 0.74rem;
+      font-size: 0.7rem;
       font-weight: 600;
       color: var(--muted);
     }
 
+    /* Thumb-Friendly Action Button on Both Mobile & Desktop */
     .arc-add-btn {
-      height: 36px;
-      padding: 0 15px;
+      min-height: 40px;
+      padding: 0 16px;
       border-radius: var(--r-pill);
       border: none;
       background: var(--orange);
@@ -705,35 +846,61 @@
       transition: transform 0.2s var(--spring), background-color 0.18s ease;
     }
 
+    @media (min-width: 768px) {
+      .arc-add-btn {
+        min-height: 44px;
+        padding: 0 18px;
+        font-size: 0.84rem;
+      }
+    }
+
     .arc-add-btn:hover { background: var(--orange-dark); }
     .arc-add-btn:active { transform: scale(0.94); }
 
-    /* Carousel Controls & Progress Dots (Matches Leaf Cafe) */
+    /* Thumb-Friendly Desktop & Mobile Carousel Navigation Dock */
     .arc-controls {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 10px;
-      margin-top: 8px;
+      gap: 8px;
+      margin-top: 6px;
     }
 
     .arc-nav-row {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 14px;
+      background: var(--white);
+      padding: 6px 12px;
+      border-radius: var(--r-pill);
+      border: 1.5px solid var(--border);
+      box-shadow: 0 6px 18px rgba(13, 74, 51, 0.06);
     }
 
     .arc-arrow {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
+      min-width: 44px;
+      height: 44px;
+      padding: 0 14px;
+      border-radius: var(--r-pill);
       border: 1.5px solid var(--border);
-      background: var(--white);
+      background: var(--cream);
       color: var(--green);
-      display: grid;
-      place-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
       cursor: pointer;
-      transition: transform 0.2s var(--spring), border-color 0.2s ease, background-color 0.2s ease;
+      transition: transform 0.2s var(--spring), border-color 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+    }
+
+    .arc-arrow-label {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      .arc-arrow-label { display: inline; }
     }
 
     .arc-arrow:hover {
@@ -742,7 +909,7 @@
       color: var(--white);
     }
 
-    .arc-arrow:active { transform: scale(0.92); }
+    .arc-arrow:active { transform: scale(0.93); }
 
     .arc-dots {
       display: flex;
@@ -751,8 +918,8 @@
     }
 
     .arc-dot {
-      width: 7px;
-      height: 7px;
+      height: 10px;
+      width: 10px;
       border-radius: var(--r-pill);
       border: none;
       background: rgba(13, 74, 51, 0.22);
@@ -761,21 +928,15 @@
     }
 
     .arc-dot.active {
-      width: 26px;
+      width: 28px;
       background: var(--green);
-    }
-
-    .arc-hint {
-      font-size: 0.78rem;
-      font-weight: 600;
-      color: var(--muted);
     }
 
     /* ==========================================================================
        COMPLETE 15-PRODUCT CATALOG WITH SEARCH & B2B / WALK-IN TOGGLE
        ========================================================================== */
     .catalog-section {
-      padding: 34px 0 44px;
+      padding: 32px 0 44px;
     }
 
     .catalog-head {
@@ -808,12 +969,12 @@
     }
 
     .mode-tab {
-      height: 36px;
-      padding: 0 16px;
+      min-height: 40px;
+      padding: 0 18px;
       border: none;
       border-radius: var(--r-pill);
       background: transparent;
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--muted);
       cursor: pointer;
@@ -862,7 +1023,7 @@
 
     .search-input {
       width: 100%;
-      height: 42px;
+      height: 44px;
       padding: 0 38px 0 40px;
       border-radius: var(--r-pill);
       border: 1.5px solid var(--border);
@@ -879,8 +1040,8 @@
       right: 8px;
       top: 50%;
       transform: translateY(-50%);
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       border: none;
       background: var(--cream);
@@ -904,12 +1065,12 @@
 
     .cat-pill {
       flex-shrink: 0;
-      height: 38px;
-      padding: 0 14px;
+      min-height: 40px;
+      padding: 0 15px;
       border-radius: var(--r-pill);
       border: 1px solid var(--border);
       background: var(--white);
-      font-size: 0.8rem;
+      font-size: 0.82rem;
       font-weight: 700;
       color: var(--green);
       cursor: pointer;
@@ -1034,7 +1195,7 @@
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      height: 36px;
+      height: 40px;
       padding: 0 6px;
       border-radius: var(--r-pill);
       background: var(--green);
@@ -1042,8 +1203,8 @@
     }
 
     .stepper button {
-      width: 26px;
-      height: 26px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
       border: none;
       background: rgba(255, 255, 255, 0.16);
@@ -1231,7 +1392,7 @@
     }
 
     /* ==========================================================================
-       SLIDE-OUT WHATSAPP ORDER DRAWER (Opened via Header Order List Pill)
+       SLIDE-OUT WHATSAPP ORDER DRAWER
        ========================================================================== */
     .backdrop {
       position: fixed;
@@ -1317,7 +1478,7 @@
 
     .drawer-input {
       width: 100%;
-      height: 40px;
+      height: 42px;
       padding: 0 14px;
       border-radius: var(--r-sm);
       border: 1px solid var(--border);
@@ -1344,10 +1505,10 @@
       </a>
 
       <nav class="nav-desktop" aria-label="Primary Menu">
-        <a href="#highlights">Menu Highlights</a>
+        <a href="#reviews">Customer Reviews</a>
+        <a href="#popular">Popular Products</a>
         <a href="#catalog">Full Rate Card</a>
-        <a href="#visit-us">Visit Plant &amp; Map</a>
-        <a href="#footer">Contact</a>
+        <a href="#visit-us">Visit Plant</a>
       </nav>
 
       <div class="header-actions">
@@ -1365,16 +1526,16 @@
 
     <div class="mobile-drawer-nav" id="mobileNav">
       <ul>
-        <li><a href="#highlights">Menu Highlights <span>→</span></a></li>
+        <li><a href="#reviews">Customer Reviews <span>→</span></a></li>
+        <li><a href="#popular">Popular Products <span>→</span></a></li>
         <li><a href="#catalog">All 15 Dairy Products <span>→</span></a></li>
         <li><a href="#visit-us">Visit Us &amp; Google Map <span>→</span></a></li>
-        <li><a href="#footer">Timings &amp; Contact <span>→</span></a></li>
       </ul>
     </div>
   </header>
 
   <main>
-    <!-- 3-SECOND CLARITY HERO -->
+    <!-- 3-SECOND CLARITY HERO (Zero Duplicate Text) -->
     <section class="hero">
       <div class="container">
         <div class="hero-card">
@@ -1385,8 +1546,8 @@
               Fresh cow &amp; buffalo milk, malai paneer, thick dahi, gavran ghee, khawa, basundi, shrikhand, thandgar lassi, and kulfi—direct from our Hadapsar plant.
             </p>
             <div class="hero-cta-group">
-              <a href="#highlights" class="btn btn-primary">
-                <span>Explore Dairy Menu</span>
+              <a href="#popular" class="btn btn-primary">
+                <span>Explore Popular Products</span>
                 <svg class="slide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
                 </svg>
@@ -1398,7 +1559,7 @@
             <div class="hero-badges">
               <span>✓ B2B Bulk Cans &amp; Slabs</span>
               <span>✓ Walk-In Retail Counter</span>
-              <span>✓ Open 8 AM – 7 PM</span>
+              <span>✓ Morning 5 AM Dispatch</span>
             </div>
           </div>
 
@@ -1414,21 +1575,100 @@
                 <strong>Satavnagar, Handewadi Rd</strong>
                 <span>Manufacturing • Wholesale • Retail</span>
               </div>
-              <span class="google-pill">4.2 ★ (16)</span>
+              <span class="open-pill">Open Till 7 PM</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- LEAF-CAFE INSPIRED CIRCULAR ARC CAROUSEL (Menu Highlights) -->
-    <section class="carousel-section" id="highlights">
-      <div class="carousel-header">
-        <p class="eyebrow">आमची दर्जेदार उत्पादने • Signature Highlights</p>
-        <h2 class="display-title">Menu Highlights</h2>
+    <!-- DEDICATED ANIMATED REVIEWS SECTION (Directly Above Popular Products) -->
+    <section class="reviews-section" id="reviews">
+      <div class="container">
+        <div class="reviews-top">
+          <div>
+            <p class="eyebrow">Trusted Across Hadapsar &amp; Pune</p>
+            <h2 class="display-title">What Customers &amp; Cafes Say</h2>
+          </div>
+
+          <div class="rating-summary-pill">
+            <span class="rating-score">4.2</span>
+            <div>
+              <div class="rating-stars" aria-label="4.2 out of 5 stars">★★★★☆</div>
+              <div class="rating-meta">Verified Google Rating • 16 Reviews</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reviews-grid">
+          <article class="review-card" style="transition-delay: 0.05s;">
+            <div>
+              <div class="review-stars-row">
+                <span>★★★★★</span>
+                <span class="review-badge">B2B Cafe Partner</span>
+              </div>
+              <p class="review-quote" style="margin-top: 10px;">
+                “Their full-cream milk and malai paneer arrive at our Hadapsar kitchen every morning before 6 AM. Consistent thickness and zero compromise on freshness.”
+              </p>
+            </div>
+            <div class="reviewer-row">
+              <div class="reviewer-avatar">RK</div>
+              <div class="reviewer-info">
+                <strong>Rohan Kulkarni</strong>
+                <span>Cafe Owner • Magarpatta Road</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" style="transition-delay: 0.14s;">
+            <div>
+              <div class="review-stars-row">
+                <span>★★★★★</span>
+                <span class="review-badge">Local Walk-In</span>
+              </div>
+              <p class="review-quote" style="margin-top: 10px;">
+                “The Thandgar Lassi, Masala Taak, and Ratnagiri Amrakhand from their Handewadi Road counter taste truly homemade. Best spot near Kale Padal.”
+              </p>
+            </div>
+            <div class="reviewer-row">
+              <div class="reviewer-avatar">SP</div>
+              <div class="reviewer-info">
+                <strong>Sneha Deshmukh</strong>
+                <span>Resident • Kale Padal, Hadapsar</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="review-card" style="transition-delay: 0.23s;">
+            <div>
+              <div class="review-stars-row">
+                <span>★★★★☆</span>
+                <span class="review-badge">Catering Bulk</span>
+              </div>
+              <p class="review-quote" style="margin-top: 10px;">
+                “We source bulk khawa, basundi, and gavran ghee from Vedganga for wedding events. Clean cold-chain handling and fair direct-plant pricing.”
+              </p>
+            </div>
+            <div class="reviewer-row">
+              <div class="reviewer-avatar">PJ</div>
+              <div class="reviewer-info">
+                <strong>Prasad Jadhav</strong>
+                <span>Local Guide • Pune</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPULAR PRODUCTS — BOTTOM CIRCULAR ARC DECK (Compact Mobile + Thumb-Friendly Desktop) -->
+    <section class="popular-section" id="popular">
+      <div class="popular-header">
+        <p class="eyebrow">आमची दर्जेदार उत्पादने • Customer Favorites</p>
+        <h2 class="display-title">Popular Products</h2>
       </div>
 
-      <div class="arc-stage" id="arcStage" aria-roledescription="carousel" aria-label="Featured Dairy Products"></div>
+      <div class="arc-stage" id="arcStage" aria-roledescription="carousel" aria-label="Popular Dairy Products"></div>
 
       <div class="arc-controls">
         <div class="arc-nav-row">
@@ -1436,15 +1676,18 @@
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="15 18 9 12 15 6"/>
             </svg>
+            <span class="arc-arrow-label">Prev</span>
           </button>
+
           <div class="arc-dots" id="arcDots"></div>
+
           <button type="button" class="arc-arrow" id="nextArcBtn" aria-label="Next product">
+            <span class="arc-arrow-label">Next</span>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"/>
             </svg>
           </button>
         </div>
-        <p class="arc-hint">↔ Swipe left or right to lock in your dairy item</p>
       </div>
     </section>
 
@@ -1617,7 +1860,7 @@
 
   <script>
     /* ==========================================================================
-       ALL 15 AUTHENTIC VEDGANGA PRODUCTS (From Banner + Fresh Dairy Lineup)
+       ALL 15 AUTHENTIC VEDGANGA PRODUCTS
        ========================================================================== */
     const PRODUCTS = [
       {
@@ -1629,7 +1872,7 @@
         name: 'Thandgar Thick Lassi',
         desc: 'Chilled, creamy Pune-style sweet lassi churned fresh from malai curd.',
         b2bPrice: 20, b2bUnit: 'per 250ml (Crate of 24)',
-        retailPrice: 30, retailUnit: '250ml Chilled Glass/Bottle',
+        retailPrice: 30, retailUnit: '250ml Chilled Bottle',
         img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=700&q=80'
       },
       {
@@ -1814,7 +2057,7 @@
     const cart = {};
 
     /* ==========================================================================
-       CIRCULAR BOTTOM-ARC CAROUSEL ENGINE (Leaf Cafe Tactile Deck Feel)
+       POPULAR PRODUCTS — BOTTOM CIRCULAR ARC DECK (Clean, Zero Duplicate Text)
        ========================================================================== */
     const arcStage = document.getElementById('arcStage');
     const arcDots = document.getElementById('arcDots');
@@ -1826,7 +2069,6 @@
             <img src="${item.img}" alt="${item.name}" width="640" height="480" />
             <span class="arc-cat-pill">${item.catLabel}</span>
             <span class="arc-num-badge">0${idx + 1}</span>
-            <span class="arc-status-label" data-status>SWIPE / TAP TO SELECT</span>
             <span class="arc-price-tag" data-arc-price>₹${item.b2bPrice}</span>
           </div>
           <div class="arc-content">
@@ -1842,10 +2084,9 @@
       `).join('');
 
       arcDots.innerHTML = FEATURED_ITEMS.map((_, idx) => `
-        <button type="button" class="arc-dot" data-dot-idx="${idx}" aria-label="Slide ${idx + 1}"></button>
+        <button type="button" class="arc-dot" data-dot-idx="${idx}" aria-label="Product ${idx + 1}"></button>
       `).join('');
 
-      // Click side cards to bring them smoothly along the bottom arc to center
       arcStage.querySelectorAll('.arc-card').forEach(card => {
         card.addEventListener('click', (e) => {
           if (e.target.closest('button')) return;
@@ -1870,13 +2111,12 @@
     function updateArcPositions() {
       const total = FEATURED_ITEMS.length;
       const isDesktop = window.innerWidth >= 768;
-      const spreadX = isDesktop ? 275 : 210;
-      const arcDropY = isDesktop ? 36 : 32; // Curves cards downward along a circular arc
-      const arcAngle = isDesktop ? 11 : 10; // Tilts cards radially from bottom pivot
+      const spreadX = isDesktop ? 260 : 172; /* Proportional mobile spread */
+      const arcDropY = isDesktop ? 34 : 26;
+      const arcAngle = isDesktop ? 10.5 : 9;
 
       arcStage.querySelectorAll('.arc-card').forEach((card, idx) => {
         const item = FEATURED_ITEMS[idx];
-        // Shortest circular offset (-2, -1, 0, +1, +2)
         let offset = idx - activeArcIndex;
         if (offset > total / 2) offset -= total;
         if (offset < -total / 2) offset += total;
@@ -1884,21 +2124,17 @@
         const abs = Math.abs(offset);
         const isCenter = offset === 0;
 
-        // Circular arc math: cards rise from bottom circular trajectory into center focus
         const tx = offset * spreadX;
         const ty = (abs * abs) * arcDropY;
         const rot = offset * arcAngle;
-        const scale = isCenter ? 1 : Math.max(0.82, 0.92 - abs * 0.05);
-        const opacity = abs > 2 ? 0 : (isCenter ? 1 : (abs === 1 ? 0.94 : 0.65));
+        const scale = isCenter ? 1 : Math.max(0.8, 0.9 - abs * 0.06);
+        const opacity = abs > 2 ? 0 : (isCenter ? 1 : (abs === 1 ? 0.92 : 0.55));
 
         card.style.transform = `translate3d(${tx}px, ${ty}px, 0) rotate(${rot}deg) scale(${scale})`;
         card.style.zIndex = String(20 - abs);
         card.style.opacity = String(opacity);
         card.style.pointerEvents = abs > 2 ? 'none' : 'auto';
         card.classList.toggle('is-center', isCenter);
-
-        const statusEl = card.querySelector('[data-status]');
-        statusEl.textContent = isCenter ? '★ SELECTED HIGHLIGHT' : 'SWIPE / TAP TO SELECT';
 
         const priceEl = card.querySelector('[data-arc-price]');
         const unitEl = card.querySelector('[data-arc-unit]');
@@ -1920,7 +2156,7 @@
     document.getElementById('prevArcBtn').addEventListener('click', () => stepArc(-1));
     document.getElementById('nextArcBtn').addEventListener('click', () => stepArc(1));
 
-    // Touch / Pointer Swipe Support for Circular Arc
+    // Swipe & Keyboard Support
     let startX = 0;
     let isDragging = false;
 
@@ -1934,12 +2170,26 @@
       if (!isDragging) return;
       isDragging = false;
       const diff = e.clientX - startX;
-      if (Math.abs(diff) > 38) {
+      if (Math.abs(diff) > 35) {
         stepArc(diff < 0 ? 1 : -1);
       }
     });
 
     window.addEventListener('resize', updateArcPositions);
+
+    /* ==========================================================================
+       SCROLL REVEAL FOR REVIEWS SECTION
+       ========================================================================== */
+    const reviewObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          reviewObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.review-card').forEach(card => reviewObserver.observe(card));
 
     /* ==========================================================================
        COMPLETE 15-ITEM CATALOG RENDERER
@@ -2023,10 +2273,10 @@
               <strong>${p.name}</strong>
               <span>₹${price} (${unit}) • ₹${sub}</span>
             </div>
-            <div class="stepper" style="height:32px;">
-              <button type="button" data-act="dec" data-id="${id}" style="width:24px;height:24px;">−</button>
+            <div class="stepper" style="height:34px;">
+              <button type="button" data-act="dec" data-id="${id}" style="width:26px;height:26px;">−</button>
               <span>${qty}</span>
-              <button type="button" data-act="inc" data-id="${id}" style="width:24px;height:24px;">+</button>
+              <button type="button" data-act="inc" data-id="${id}" style="width:26px;height:26px;">+</button>
             </div>
           </div>
         `;
@@ -2046,7 +2296,6 @@
       updateCart();
     });
 
-    // Mode Tabs (B2B vs Retail)
     document.querySelectorAll('.mode-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
@@ -2058,7 +2307,6 @@
       });
     });
 
-    // Category Pills
     document.querySelectorAll('.cat-pill').forEach(pill => {
       pill.addEventListener('click', () => {
         document.querySelectorAll('.cat-pill').forEach(p => p.classList.remove('active'));
@@ -2068,7 +2316,6 @@
       });
     });
 
-    // Search Input
     searchInput.addEventListener('input', e => {
       query = e.target.value;
       clearSearchBtn.classList.toggle('show', query.length > 0);
@@ -2082,7 +2329,6 @@
       renderCatalog();
     });
 
-    // Mobile Menu Toggle
     const menuBtn = document.getElementById('menuBtn');
     const mobileNav = document.getElementById('mobileNav');
     menuBtn.addEventListener('click', () => {
@@ -2094,7 +2340,6 @@
       menuBtn.setAttribute('aria-expanded', 'false');
     }));
 
-    // Order Drawer Controls
     const drawer = document.getElementById('drawer');
     const backdrop = document.getElementById('backdrop');
     const openDrawer = () => { drawer.classList.add('open'); backdrop.classList.add('open'); };
@@ -2138,7 +2383,6 @@
       window.open(`https://wa.me/919552548733?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
     });
 
-    // Initialize
     initArcCarousel();
     renderCatalog();
     updateCart();
