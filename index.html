@@ -662,7 +662,7 @@
     }
 
     /* ==========================================================================
-       POPULAR PRODUCTS — ZERO-JITTER MOBILE & DESKTOP HORIZONTAL CAROUSEL
+       POPULAR PRODUCTS — PURE COMPOSITOR NATIVE TOUCH CAROUSEL (ZERO MOBILE LAG)
        ========================================================================== */
     .popular-section {
       padding: 32px 0 36px;
@@ -672,28 +672,22 @@
     .popular-header {
       text-align: center;
       max-width: 520px;
-      margin: 0 auto 16px;
+      margin: 0 auto 14px;
       padding: 0 20px;
     }
 
     .snap-track {
       display: flex;
       align-items: stretch;
-      gap: 16px;
+      gap: 14px;
       overflow-x: auto;
       overflow-y: hidden;
       overscroll-behavior-x: contain;
-      scroll-snap-type: x proximity;
       -webkit-overflow-scrolling: touch;
-      padding: 18px calc(50vw - 125px) 26px;
+      padding: 12px 20px 22px;
       scrollbar-width: none;
       cursor: grab;
-    }
-
-    @media (hover: hover) and (pointer: fine) {
-      .snap-track {
-        scroll-snap-type: x mandatory;
-      }
+      transform: translateZ(0);
     }
 
     .snap-track:active { cursor: grabbing; }
@@ -702,37 +696,40 @@
     @media (min-width: 768px) {
       .snap-track {
         gap: 28px;
+        scroll-snap-type: x mandatory;
         padding: 24px calc(50vw - 150px) 38px;
       }
     }
 
     .snap-card {
-      flex: 0 0 250px;
-      scroll-snap-align: center;
+      flex: 0 0 256px;
       background: var(--white);
       border-radius: 20px;
-      border: 2px solid var(--border);
+      border: 1.5px solid var(--border);
       overflow: hidden;
-      box-shadow: 0 10px 24px rgba(13, 74, 51, 0.07);
-      transform-origin: 50% 100%;
-      transition: border-color 0.25s ease, box-shadow 0.3s ease;
-      will-change: transform;
-      contain: layout style;
+      box-shadow: 0 8px 20px rgba(13, 74, 51, 0.06);
+      transform: translateZ(0);
+      backface-visibility: hidden;
       user-select: none;
     }
 
     @media (min-width: 768px) {
-      .snap-card { flex: 0 0 300px; }
-    }
-
-    .snap-card.is-active {
-      border-color: var(--green);
-      box-shadow: 0 18px 38px rgba(13, 74, 51, 0.16);
+      .snap-card {
+        flex: 0 0 300px;
+        scroll-snap-align: center;
+        transform-origin: 50% 100%;
+        transition: border-color 0.25s ease, box-shadow 0.3s ease;
+        will-change: transform;
+      }
+      .snap-card.is-active {
+        border-color: var(--green);
+        box-shadow: 0 18px 38px rgba(13, 74, 51, 0.16);
+      }
     }
 
     .snap-media {
       position: relative;
-      height: 168px;
+      height: 170px;
       background: var(--green-deep);
       overflow: hidden;
     }
@@ -818,7 +815,7 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
-      margin-top: 6px;
+      margin-top: 4px;
     }
 
     .snap-dot {
@@ -1684,7 +1681,7 @@
       </div>
     </section>
 
-    <!-- POPULAR PRODUCTS — ZERO-JITTER HORIZONTAL DECK -->
+    <!-- POPULAR PRODUCTS — 60FPS COMPOSITOR TOUCH CAROUSEL -->
     <section class="popular-section" id="popular">
       <div class="popular-header reveal">
         <p class="eyebrow">CUSTOMER FAVORITES</p>
@@ -1988,7 +1985,7 @@
     };
 
     /* ==========================================================================
-       ALL 15 PRODUCTS — WIRED TO YOUR EXACT UPLOADED .WEBP FILENAMES
+       ALL 15 PRODUCTS — WIRED TO LOWERCASE .WEBP FILENAMES
        ========================================================================== */
     const PRODUCTS = [
       {
@@ -2001,7 +1998,7 @@
         desc: 'Chilled, creamy Pune-style sweet lassi churned fresh from malai curd.',
         b2bPrice: 20, b2bUnit: 'per 250ml (Crate of 24)',
         retailPrice: 30, retailUnit: '250ml Chilled Bottle',
-        img: 'Thandgar-lassi.webp'
+        img: 'thandgar-lassi.webp'
       },
       {
         id: 'malai-paneer',
@@ -2209,59 +2206,36 @@
     });
 
     /* ==========================================================================
-       ZERO-JITTER HORIZONTAL CAROUSEL (Cached Geometry + GPU-Only Transforms)
+       60FPS COMPOSITOR CAROUSEL (Native Touch Momentum on Mobile + Fan on Desktop)
        ========================================================================== */
     const snapTrack = document.getElementById('snapTrack');
     const snapDots = document.getElementById('snapDots');
     let snapCards = [];
     let cardCenters = [];
     let trackHalfWidth = 0;
-    let cardSpan = 266;
+    let cardSpan = 328;
     let ticking = false;
-    let isTouchActive = false;
-
-    function buildCardHTML(item, realIdx, isClone = false) {
-      const price = mode === 'b2b' ? item.b2bPrice : item.retailPrice;
-      const unit = mode === 'b2b' ? item.b2bUnit : item.retailUnit;
-      const title = lang === 'mr' ? item.nameMr : item.name;
-      return `
-        <article class="snap-card" data-real-idx="${realIdx}" ${isClone ? 'data-clone="true"' : ''}>
-          <div class="snap-media">
-            <img src="${item.img}" alt="${title}" width="600" height="420" decoding="async" />
-            <span class="snap-cat-pill">${item.catLabel}</span>
-            <span class="snap-price">₹${price}</span>
-          </div>
-          <div class="snap-body">
-            <h3 class="snap-title">${title}</h3>
-            <p class="snap-desc">${item.desc}</p>
-            <span class="snap-unit">${unit}</span>
-          </div>
-        </article>
-      `;
-    }
-
-    function measureCarousel() {
-      trackHalfWidth = snapTrack.clientWidth / 2;
-      const isDesktop = window.innerWidth >= 768;
-      cardSpan = (snapCards[0]?.offsetWidth || (isDesktop ? 300 : 250)) + (isDesktop ? 28 : 16);
-      cardCenters = snapCards.map(card => card.offsetLeft + card.offsetWidth / 2);
-    }
 
     function renderSnapCarousel() {
-      const len = FEATURED_ITEMS.length;
-      const leadClones = [
-        buildCardHTML(FEATURED_ITEMS[len - 2], len - 2, true),
-        buildCardHTML(FEATURED_ITEMS[len - 1], len - 1, true)
-      ].join('');
-
-      const mainCards = FEATURED_ITEMS.map((item, idx) => buildCardHTML(item, idx, false)).join('');
-
-      const tailClones = [
-        buildCardHTML(FEATURED_ITEMS[0], 0, true),
-        buildCardHTML(FEATURED_ITEMS[1], 1, true)
-      ].join('');
-
-      snapTrack.innerHTML = leadClones + mainCards + tailClones;
+      snapTrack.innerHTML = FEATURED_ITEMS.map((item, idx) => {
+        const price = mode === 'b2b' ? item.b2bPrice : item.retailPrice;
+        const unit = mode === 'b2b' ? item.b2bUnit : item.retailUnit;
+        const title = lang === 'mr' ? item.nameMr : item.name;
+        return `
+          <article class="snap-card" data-idx="${idx}">
+            <div class="snap-media">
+              <img src="${item.img}" alt="${title}" width="600" height="420" decoding="async" />
+              <span class="snap-cat-pill">${item.catLabel}</span>
+              <span class="snap-price">₹${price}</span>
+            </div>
+            <div class="snap-body">
+              <h3 class="snap-title">${title}</h3>
+              <p class="snap-desc">${item.desc}</p>
+              <span class="snap-unit">${unit}</span>
+            </div>
+          </article>
+        `;
+      }).join('');
 
       snapDots.innerHTML = FEATURED_ITEMS.map((_, idx) => `
         <button type="button" class="snap-dot" data-dot="${idx}" aria-label="Slide ${idx + 1}"></button>
@@ -2271,99 +2245,80 @@
 
       requestAnimationFrame(() => {
         measureCarousel();
-        const initialCard = snapCards[3];
-        if (initialCard) {
-          snapTrack.scrollLeft = cardCenters[3] - trackHalfWidth;
+        if (window.innerWidth >= 768 && cardCenters[1] !== undefined) {
+          snapTrack.scrollLeft = cardCenters[1] - trackHalfWidth;
         }
-        updateArcTransforms();
+        updateCarouselVisuals();
       });
 
-      snapCards.forEach((card, domIdx) => {
+      snapCards.forEach((card, idx) => {
         card.addEventListener('click', () => {
-          snapTrack.scrollTo({ left: cardCenters[domIdx] - trackHalfWidth, behavior: 'smooth' });
+          if (cardCenters[idx] !== undefined) {
+            snapTrack.scrollTo({ left: cardCenters[idx] - trackHalfWidth, behavior: 'smooth' });
+          }
         });
       });
 
-      snapDots.querySelectorAll('.snap-dot').forEach((dot, realIdx) => {
+      snapDots.querySelectorAll('.snap-dot').forEach((dot, idx) => {
         dot.addEventListener('click', () => {
-          const targetIdx = realIdx + 2;
-          if (cardCenters[targetIdx] !== undefined) {
-            snapTrack.scrollTo({ left: cardCenters[targetIdx] - trackHalfWidth, behavior: 'smooth' });
+          if (cardCenters[idx] !== undefined) {
+            snapTrack.scrollTo({ left: cardCenters[idx] - trackHalfWidth, behavior: 'smooth' });
           }
         });
       });
     }
 
-    function updateArcTransforms() {
+    function measureCarousel() {
+      trackHalfWidth = snapTrack.clientWidth / 2;
+      const isDesktop = window.innerWidth >= 768;
+      cardSpan = (snapCards[0]?.offsetWidth || (isDesktop ? 300 : 256)) + (isDesktop ? 28 : 14);
+      cardCenters = snapCards.map(card => card.offsetLeft + card.offsetWidth / 2);
+    }
+
+    function updateCarouselVisuals() {
       const isDesktop = window.innerWidth >= 768;
       const center = snapTrack.scrollLeft + trackHalfWidth;
-      let activeRealIdx = 0;
+      let activeIdx = 0;
       let minDist = Infinity;
 
       for (let i = 0; i < snapCards.length; i++) {
         const dist = cardCenters[i] - center;
         const absDist = Math.abs(dist);
-        const norm = Math.max(-2.2, Math.min(2.2, dist / cardSpan));
-        const absNorm = Math.abs(norm);
-
         if (absDist < minDist) {
           minDist = absDist;
-          activeRealIdx = Number(snapCards[i].dataset.realIdx);
+          activeIdx = i;
         }
 
         if (isDesktop) {
+          const norm = Math.max(-2.2, Math.min(2.2, dist / cardSpan));
+          const absNorm = Math.abs(norm);
           const ty = (absNorm * absNorm) * 14;
           const rot = norm * 6.5;
           const scale = Math.max(0.88, 1 - absNorm * 0.06);
           snapCards[i].style.transform = `translate3d(0, ${ty.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+          snapCards[i].classList.toggle('is-active', absDist < cardSpan * 0.45);
         } else {
-          const scale = Math.max(0.93, 1 - absNorm * 0.05);
-          snapCards[i].style.transform = `translate3d(0, 0, 0) scale(${scale.toFixed(3)})`;
+          // On mobile: zero JS transform mutations during touch scroll for pure native 60fps glide
+          if (snapCards[i].style.transform) {
+            snapCards[i].style.transform = '';
+          }
         }
-
-        snapCards[i].classList.toggle('is-active', absDist < cardSpan * 0.45);
       }
 
       snapDots.querySelectorAll('.snap-dot').forEach((d, idx) => {
-        d.classList.toggle('active', idx === activeRealIdx);
+        d.classList.toggle('active', idx === activeIdx);
       });
       ticking = false;
     }
 
-    function wrapInfiniteClones() {
-      if (isTouchActive) return;
-      const center = snapTrack.scrollLeft + trackHalfWidth;
-      let closestDomIdx = 0;
-      let minDist = Infinity;
-
-      for (let i = 0; i < cardCenters.length; i++) {
-        const d = Math.abs(cardCenters[i] - center);
-        if (d < minDist) { minDist = d; closestDomIdx = i; }
-      }
-
-      const total = FEATURED_ITEMS.length;
-      if (closestDomIdx < 2) {
-        snapTrack.scrollLeft = cardCenters[closestDomIdx + total] - trackHalfWidth;
-        updateArcTransforms();
-      } else if (closestDomIdx >= total + 2) {
-        snapTrack.scrollLeft = cardCenters[closestDomIdx - total] - trackHalfWidth;
-        updateArcTransforms();
-      }
-    }
-
-    snapTrack.addEventListener('touchstart', () => { isTouchActive = true; }, { passive: true });
-    snapTrack.addEventListener('touchend', () => { isTouchActive = false; }, { passive: true });
-
-    let scrollEndTimer;
     snapTrack.addEventListener('scroll', () => {
       if (!ticking) {
-        requestAnimationFrame(updateArcTransforms);
+        requestAnimationFrame(updateCarouselVisuals);
         ticking = true;
       }
-      clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(wrapInfiniteClones, 220);
     }, { passive: true });
 
+    // Desktop mouse drag support
     let isDown = false;
     let startX = 0;
     let scrollStart = 0;
@@ -2383,7 +2338,7 @@
 
     window.addEventListener('resize', () => {
       measureCarousel();
-      updateArcTransforms();
+      updateCarouselVisuals();
     });
 
     /* ==========================================================================
