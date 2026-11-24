@@ -144,7 +144,7 @@
     }
 
     /* ==========================================================================
-       REFINED UI BUTTON SYSTEM (Consistent Height, Radius & Tactile Feedback)
+       REFINED UI BUTTON SYSTEM
        ========================================================================== */
     .btn {
       display: inline-flex;
@@ -341,7 +341,7 @@
     }
 
     /* ==========================================================================
-       HERO SECTION (Balanced Padding & Full-Width Mobile CTAs)
+       HERO SECTION
        ========================================================================== */
     .hero {
       padding: 20px 0 28px;
@@ -458,7 +458,7 @@
     }
 
     /* ==========================================================================
-       DEDICATED REVIEWS SECTION (Clean Mobile Card + Sleek Desktop Pill)
+       DEDICATED REVIEWS SECTION
        ========================================================================== */
     .reviews-section {
       padding: 32px 0 28px;
@@ -497,7 +497,6 @@
       letter-spacing: -0.02em;
     }
 
-    /* Responsive Rating Card (Full-width clean card on mobile, compact horizontal bar on desktop) */
     .reviews-unified-bar {
       display: flex;
       flex-direction: column;
@@ -663,7 +662,7 @@
     }
 
     /* ==========================================================================
-       POPULAR PRODUCTS — LOCKED HORIZONTAL DECK
+       POPULAR PRODUCTS — ZERO-JITTER MOBILE & DESKTOP HORIZONTAL CAROUSEL
        ========================================================================== */
     .popular-section {
       padding: 32px 0 36px;
@@ -684,11 +683,17 @@
       overflow-x: auto;
       overflow-y: hidden;
       overscroll-behavior-x: contain;
-      scroll-snap-type: x mandatory;
+      scroll-snap-type: x proximity;
       -webkit-overflow-scrolling: touch;
       padding: 18px calc(50vw - 125px) 26px;
       scrollbar-width: none;
       cursor: grab;
+    }
+
+    @media (hover: hover) and (pointer: fine) {
+      .snap-track {
+        scroll-snap-type: x mandatory;
+      }
     }
 
     .snap-track:active { cursor: grabbing; }
@@ -704,7 +709,6 @@
     .snap-card {
       flex: 0 0 250px;
       scroll-snap-align: center;
-      scroll-snap-stop: always;
       background: var(--white);
       border-radius: 20px;
       border: 2px solid var(--border);
@@ -713,6 +717,7 @@
       transform-origin: 50% 100%;
       transition: border-color 0.25s ease, box-shadow 0.3s ease;
       will-change: transform;
+      contain: layout style;
       user-select: none;
     }
 
@@ -832,7 +837,7 @@
     }
 
     /* ==========================================================================
-       COMPLETE 15-PRODUCT CATALOG (Walk-In & B2B Rate Card)
+       COMPLETE 15-PRODUCT CATALOG
        ========================================================================== */
     .catalog-section {
       padding: 36px 0 48px;
@@ -1392,7 +1397,6 @@
       color: var(--orange);
     }
 
-    /* Centered Footer Bottom (Icons, Copyright & NoahStudio Credit) */
     .footer-bottom {
       padding-top: 26px;
       display: flex;
@@ -1577,7 +1581,7 @@
 
           <div class="hero-visual">
             <img
-              src="https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=800&q=80"
+              src="full-cream-milk.webp"
               alt="Fresh cold-chained milk from Vedganga Dairy Hadapsar"
               width="800"
               height="600"
@@ -1680,7 +1684,7 @@
       </div>
     </section>
 
-    <!-- POPULAR PRODUCTS — LOCKED HORIZONTAL DECK -->
+    <!-- POPULAR PRODUCTS — ZERO-JITTER HORIZONTAL DECK -->
     <section class="popular-section" id="popular">
       <div class="popular-header reveal">
         <p class="eyebrow">CUSTOMER FAVORITES</p>
@@ -1787,11 +1791,10 @@
     </section>
   </main>
 
-  <!-- CLEAN EDITORIAL FOOTER WITH CENTERED CONTACT ICONS & CENTERED CREDITS -->
+  <!-- CLEAN EDITORIAL FOOTER -->
   <footer class="footer" id="footer">
     <div class="container">
       <div class="footer-main">
-        <!-- Left Brand, FSSAI & 100% Vegetarian Credentials -->
         <div class="footer-brand-col">
           <div>
             <div class="footer-logo-lockup">
@@ -1827,7 +1830,6 @@
           </div>
         </div>
 
-        <!-- Right 4 Clean Navigation Columns -->
         <div class="footer-nav-cols">
           <div class="footer-col">
             <h4>Products</h4>
@@ -1870,7 +1872,6 @@
         </div>
       </div>
 
-      <!-- Centered Contact Icons, Copyright & Website by NoahStudio -->
       <div class="footer-bottom">
         <div class="footer-contact-icons" aria-label="Quick Contact Links">
           <a href="tel:+919552548733" class="footer-icon-link" title="Call Plant" aria-label="Call Vedganga Dairy">
@@ -1987,7 +1988,7 @@
     };
 
     /* ==========================================================================
-       ALL 15 PRODUCTS (Replace 'img' paths with real .webp photos in assets/)
+       ALL 15 PRODUCTS — WIRED TO YOUR EXACT UPLOADED .WEBP FILENAMES
        ========================================================================== */
     const PRODUCTS = [
       {
@@ -2000,7 +2001,7 @@
         desc: 'Chilled, creamy Pune-style sweet lassi churned fresh from malai curd.',
         b2bPrice: 20, b2bUnit: 'per 250ml (Crate of 24)',
         retailPrice: 30, retailUnit: '250ml Chilled Bottle',
-        img: 'https://images.unsplash.com/photo-1572490122747-3968b75cc699?auto=format&fit=crop&w=700&q=80'
+        img: 'Thandgar-lassi.webp'
       },
       {
         id: 'malai-paneer',
@@ -2012,7 +2013,7 @@
         desc: 'Ultra-soft, high-yield malai paneer pressed every morning for hotels & homes.',
         b2bPrice: 340, b2bUnit: 'per kg (5kg Bulk Slab)',
         retailPrice: 95, retailUnit: '250g Fresh Pack',
-        img: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?auto=format&fit=crop&w=700&q=80'
+        img: 'malai-paneer.webp'
       },
       {
         id: 'malai-dahi',
@@ -2024,7 +2025,7 @@
         desc: 'Rich, creamy set curd with a thick malai layer and zero water separation.',
         b2bPrice: 78, b2bUnit: 'per kg (5kg / 10kg Tub)',
         retailPrice: 45, retailUnit: '500g Cup',
-        img: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=700&q=80'
+        img: 'malai-dahi.webp'
       },
       {
         id: 'amrakhand',
@@ -2036,7 +2037,7 @@
         desc: 'Velvety strained chakka blended with real Alphonso mango pulp.',
         b2bPrice: 250, b2bUnit: 'per kg (Bulk Tub)',
         retailPrice: 140, retailUnit: '500g Family Tub',
-        img: 'https://images.unsplash.com/photo-1589301760014-d929f3979dbc?auto=format&fit=crop&w=700&q=80'
+        img: 'amrakhand.webp'
       },
       {
         id: 'masala-taak',
@@ -2048,7 +2049,7 @@
         desc: 'Refreshing roasted jeera & ginger buttermilk—ideal for meals and events.',
         b2bPrice: 14, b2bUnit: 'per 200ml (Crate of 24)',
         retailPrice: 20, retailUnit: '250ml Chilled Pack',
-        img: 'https://images.unsplash.com/photo-1626082927389-6cd097cdc6ec?auto=format&fit=crop&w=700&q=80'
+        img: 'masala-taak.webp'
       },
       {
         id: 'cold-coffee',
@@ -2060,7 +2061,7 @@
         desc: 'Rich café-style chilled coffee blended with full-cream Vedganga milk.',
         b2bPrice: 28, b2bUnit: 'per 200ml (Crate of 24)',
         retailPrice: 40, retailUnit: '250ml Chilled Bottle',
-        img: 'https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=700&q=80'
+        img: 'cold-coffe.webp'
       },
       {
         id: 'gavran-ghee',
@@ -2072,7 +2073,7 @@
         desc: 'Aromatic golden granular ghee simmered slowly from pure butter cream.',
         b2bPrice: 590, b2bUnit: 'per Litre (5L / 15L Tin)',
         retailPrice: 325, retailUnit: '500ml Jar',
-        img: 'https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=700&q=80'
+        img: 'gavran-ghee.webp'
       },
       {
         id: 'khawa',
@@ -2084,7 +2085,7 @@
         desc: 'Pure, slow-reduced milk mawa crafted for pedha, gulab jamun & barfi makers.',
         b2bPrice: 320, b2bUnit: 'per kg (5kg Bulk Pack)',
         retailPrice: 175, retailUnit: '500g Pack',
-        img: 'https://images.unsplash.com/photo-1605197161470-5d2a9af0ac7e?auto=format&fit=crop&w=700&q=80'
+        img: 'khawa.webp'
       },
       {
         id: 'basundi',
@@ -2096,7 +2097,7 @@
         desc: 'Slow-simmered thickened milk delicately flavored with cardamom, saffron & nuts.',
         b2bPrice: 260, b2bUnit: 'per Litre (Catering Tub)',
         retailPrice: 150, retailUnit: '500ml Pack',
-        img: 'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=700&q=80'
+        img: 'basundi.webp'
       },
       {
         id: 'shrikhand',
@@ -2108,7 +2109,7 @@
         desc: 'Smooth, creamy strained curd dessert infused with saffron and nutmeg.',
         b2bPrice: 230, b2bUnit: 'per kg (Bulk Tub)',
         retailPrice: 130, retailUnit: '500g Family Tub',
-        img: 'https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=700&q=80'
+        img: 'kesar-elaichi-shrikhand.webp'
       },
       {
         id: 'green-peas',
@@ -2120,7 +2121,7 @@
         desc: 'Tender, sweet green peas preserved in our 4°C–0°C cold chain for restaurants.',
         b2bPrice: 95, b2bUnit: 'per kg (5kg Bag)',
         retailPrice: 110, retailUnit: '1kg Pack',
-        img: 'https://images.unsplash.com/photo-1587735243615-c03f25aaff15?auto=format&fit=crop&w=700&q=80'
+        img: 'chilled-green-peas.webp'
       },
       {
         id: 'fresh-cream',
@@ -2132,7 +2133,7 @@
         desc: 'High-fat fresh dairy cream for ghee making, makhani gravies, and bakeries.',
         b2bPrice: 240, b2bUnit: 'per kg (5kg Tub)',
         retailPrice: 130, retailUnit: '500g Pack',
-        img: 'https://images.unsplash.com/photo-1563636619-e9143da7973b?auto=format&fit=crop&w=700&q=80'
+        img: 'fresh-dairy-cream.webp'
       },
       {
         id: 'rangeela-icecream',
@@ -2144,7 +2145,7 @@
         desc: 'Rich dairy ice cream tubs and family packs for celebrations and retail counters.',
         b2bPrice: 190, b2bUnit: 'per 4L Party Brick',
         retailPrice: 120, retailUnit: '750ml Family Pack',
-        img: 'https://images.unsplash.com/photo-1501443762994-82bd5dace89a?auto=format&fit=crop&w=700&q=80'
+        img: 'rangeela-ice-cream.webp'
       },
       {
         id: 'malai-kulfi',
@@ -2156,7 +2157,7 @@
         desc: 'Dense, slow-frozen mawa & pista kulfi sticks—a local Hadapsar favorite.',
         b2bPrice: 16, b2bUnit: 'per Stick (Box of 20)',
         retailPrice: 25, retailUnit: 'Single Kulfi Stick',
-        img: 'https://images.unsplash.com/photo-1560008581-09826d1de69e?auto=format&fit=crop&w=700&q=80'
+        img: 'traditional-malai-kulfi.webp'
       },
       {
         id: 'fresh-milk',
@@ -2168,7 +2169,7 @@
         desc: 'Lab-tested 4°C chilled milk dispatched every morning at 5:00 AM across Hadapsar.',
         b2bPrice: 64, b2bUnit: 'per Litre (10L+ Can)',
         retailPrice: 70, retailUnit: '1 Litre Pouch',
-        img: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?auto=format&fit=crop&w=700&q=80'
+        img: 'full-cream-milk.webp'
       }
     ];
 
@@ -2208,12 +2209,16 @@
     });
 
     /* ==========================================================================
-       LOCKED HORIZONTAL CAROUSEL
+       ZERO-JITTER HORIZONTAL CAROUSEL (Cached Geometry + GPU-Only Transforms)
        ========================================================================== */
     const snapTrack = document.getElementById('snapTrack');
     const snapDots = document.getElementById('snapDots');
     let snapCards = [];
+    let cardCenters = [];
+    let trackHalfWidth = 0;
+    let cardSpan = 266;
     let ticking = false;
+    let isTouchActive = false;
 
     function buildCardHTML(item, realIdx, isClone = false) {
       const price = mode === 'b2b' ? item.b2bPrice : item.retailPrice;
@@ -2222,7 +2227,7 @@
       return `
         <article class="snap-card" data-real-idx="${realIdx}" ${isClone ? 'data-clone="true"' : ''}>
           <div class="snap-media">
-            <img src="${item.img}" alt="${title}" width="600" height="420" />
+            <img src="${item.img}" alt="${title}" width="600" height="420" decoding="async" />
             <span class="snap-cat-pill">${item.catLabel}</span>
             <span class="snap-price">₹${price}</span>
           </div>
@@ -2233,6 +2238,13 @@
           </div>
         </article>
       `;
+    }
+
+    function measureCarousel() {
+      trackHalfWidth = snapTrack.clientWidth / 2;
+      const isDesktop = window.innerWidth >= 768;
+      cardSpan = (snapCards[0]?.offsetWidth || (isDesktop ? 300 : 250)) + (isDesktop ? 28 : 16);
+      cardCenters = snapCards.map(card => card.offsetLeft + card.offsetWidth / 2);
     }
 
     function renderSnapCarousel() {
@@ -2258,26 +2270,25 @@
       snapCards = Array.from(snapTrack.querySelectorAll('.snap-card'));
 
       requestAnimationFrame(() => {
+        measureCarousel();
         const initialCard = snapCards[3];
         if (initialCard) {
-          snapTrack.scrollLeft = initialCard.offsetLeft - (snapTrack.clientWidth - initialCard.offsetWidth) / 2;
+          snapTrack.scrollLeft = cardCenters[3] - trackHalfWidth;
         }
         updateArcTransforms();
       });
 
-      snapCards.forEach((card) => {
+      snapCards.forEach((card, domIdx) => {
         card.addEventListener('click', () => {
-          const targetLeft = card.offsetLeft - (snapTrack.clientWidth - card.offsetWidth) / 2;
-          snapTrack.scrollTo({ left: targetLeft, behavior: 'smooth' });
+          snapTrack.scrollTo({ left: cardCenters[domIdx] - trackHalfWidth, behavior: 'smooth' });
         });
       });
 
       snapDots.querySelectorAll('.snap-dot').forEach((dot, realIdx) => {
         dot.addEventListener('click', () => {
-          const targetCard = snapCards[realIdx + 2];
-          if (targetCard) {
-            const targetLeft = targetCard.offsetLeft - (snapTrack.clientWidth - targetCard.offsetWidth) / 2;
-            snapTrack.scrollTo({ left: targetLeft, behavior: 'smooth' });
+          const targetIdx = realIdx + 2;
+          if (cardCenters[targetIdx] !== undefined) {
+            snapTrack.scrollTo({ left: cardCenters[targetIdx] - trackHalfWidth, behavior: 'smooth' });
           }
         });
       });
@@ -2285,41 +2296,63 @@
 
     function updateArcTransforms() {
       const isDesktop = window.innerWidth >= 768;
-      const center = snapTrack.scrollLeft + snapTrack.clientWidth / 2;
-      const cardSpan = (snapCards[0]?.offsetWidth || 260) + (isDesktop ? 28 : 16);
+      const center = snapTrack.scrollLeft + trackHalfWidth;
       let activeRealIdx = 0;
       let minDist = Infinity;
 
-      snapCards.forEach((card) => {
-        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-        const dist = cardCenter - center;
+      for (let i = 0; i < snapCards.length; i++) {
+        const dist = cardCenters[i] - center;
         const absDist = Math.abs(dist);
         const norm = Math.max(-2.2, Math.min(2.2, dist / cardSpan));
         const absNorm = Math.abs(norm);
 
         if (absDist < minDist) {
           minDist = absDist;
-          activeRealIdx = Number(card.dataset.realIdx);
+          activeRealIdx = Number(snapCards[i].dataset.realIdx);
         }
 
         if (isDesktop) {
           const ty = (absNorm * absNorm) * 14;
           const rot = norm * 6.5;
           const scale = Math.max(0.88, 1 - absNorm * 0.06);
-          card.style.transform = `translate3d(0, ${ty.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+          snapCards[i].style.transform = `translate3d(0, ${ty.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
         } else {
-          const scale = Math.max(0.92, 1 - absNorm * 0.06);
-          card.style.transform = `scale(${scale.toFixed(3)})`;
+          const scale = Math.max(0.93, 1 - absNorm * 0.05);
+          snapCards[i].style.transform = `translate3d(0, 0, 0) scale(${scale.toFixed(3)})`;
         }
 
-        card.classList.toggle('is-active', absDist < cardSpan * 0.45);
-      });
+        snapCards[i].classList.toggle('is-active', absDist < cardSpan * 0.45);
+      }
 
       snapDots.querySelectorAll('.snap-dot').forEach((d, idx) => {
         d.classList.toggle('active', idx === activeRealIdx);
       });
       ticking = false;
     }
+
+    function wrapInfiniteClones() {
+      if (isTouchActive) return;
+      const center = snapTrack.scrollLeft + trackHalfWidth;
+      let closestDomIdx = 0;
+      let minDist = Infinity;
+
+      for (let i = 0; i < cardCenters.length; i++) {
+        const d = Math.abs(cardCenters[i] - center);
+        if (d < minDist) { minDist = d; closestDomIdx = i; }
+      }
+
+      const total = FEATURED_ITEMS.length;
+      if (closestDomIdx < 2) {
+        snapTrack.scrollLeft = cardCenters[closestDomIdx + total] - trackHalfWidth;
+        updateArcTransforms();
+      } else if (closestDomIdx >= total + 2) {
+        snapTrack.scrollLeft = cardCenters[closestDomIdx - total] - trackHalfWidth;
+        updateArcTransforms();
+      }
+    }
+
+    snapTrack.addEventListener('touchstart', () => { isTouchActive = true; }, { passive: true });
+    snapTrack.addEventListener('touchend', () => { isTouchActive = false; }, { passive: true });
 
     let scrollEndTimer;
     snapTrack.addEventListener('scroll', () => {
@@ -2328,26 +2361,7 @@
         ticking = true;
       }
       clearTimeout(scrollEndTimer);
-      scrollEndTimer = setTimeout(() => {
-        const center = snapTrack.scrollLeft + snapTrack.clientWidth / 2;
-        let closestDomIdx = 0;
-        let minDist = Infinity;
-        snapCards.forEach((card, i) => {
-          const d = Math.abs((card.offsetLeft + card.offsetWidth / 2) - center);
-          if (d < minDist) { minDist = d; closestDomIdx = i; }
-        });
-
-        const total = FEATURED_ITEMS.length;
-        if (closestDomIdx < 2) {
-          const target = snapCards[closestDomIdx + total];
-          snapTrack.scrollLeft = target.offsetLeft - (snapTrack.clientWidth - target.offsetWidth) / 2;
-          updateArcTransforms();
-        } else if (closestDomIdx >= total + 2) {
-          const target = snapCards[closestDomIdx - total];
-          snapTrack.scrollLeft = target.offsetLeft - (snapTrack.clientWidth - target.offsetWidth) / 2;
-          updateArcTransforms();
-        }
-      }, 140);
+      scrollEndTimer = setTimeout(wrapInfiniteClones, 220);
     }, { passive: true });
 
     let isDown = false;
@@ -2367,7 +2381,10 @@
       snapTrack.scrollLeft = scrollStart - (x - startX) * 1.4;
     });
 
-    window.addEventListener('resize', updateArcTransforms);
+    window.addEventListener('resize', () => {
+      measureCarousel();
+      updateArcTransforms();
+    });
 
     /* ==========================================================================
        SCROLL REVEAL OBSERVER
