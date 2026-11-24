@@ -340,7 +340,7 @@
     }
 
     /* ==========================================================================
-       HERO SECTION (Uncropped 4:3 Milk Frame)
+       HERO SECTION
        ========================================================================== */
     .hero {
       padding: 20px 0 28px;
@@ -669,90 +669,86 @@
     }
 
     /* ==========================================================================
-       POPULAR PRODUCTS — LEAF CAFE STYLE SILKY SCROLL-SNAP HIGHLIGHT DECK
-       Zero JS scroll math: native CSS scroll-snap + IntersectionObserver focus
+       POPULAR PRODUCTS — CONTINUOUS CIRCULAR ARCH WHEEL (BOTTOM-TO-TOP LOOP)
+       Cards rise smoothly along a circular arc from bottom into center & loop endlessly
        ========================================================================== */
     .popular-section {
       padding: 32px 0 36px;
+      overflow: hidden;
     }
 
     .popular-header {
       text-align: center;
       max-width: 520px;
-      margin: 0 auto 18px;
+      margin: 0 auto 10px;
       padding: 0 20px;
     }
 
-    .highlight-reel {
+    .arch-wheel-stage {
+      position: relative;
+      width: 100%;
+      height: 410px;
       display: flex;
-      align-items: stretch;
-      gap: 16px;
-      overflow-x: auto;
-      scroll-snap-type: x mandatory;
-      scroll-behavior: smooth;
-      -webkit-overflow-scrolling: touch;
-      padding: 14px calc(50vw - 135px) 24px;
-      scrollbar-width: none;
+      align-items: center;
+      justify-content: center;
+      touch-action: pan-y;
+      user-select: none;
       cursor: grab;
+      overflow: hidden;
     }
 
-    .highlight-reel:active { cursor: grabbing; }
-    .highlight-reel::-webkit-scrollbar { display: none; }
+    .arch-wheel-stage:active {
+      cursor: grabbing;
+    }
 
     @media (min-width: 768px) {
-      .highlight-reel {
-        gap: 24px;
-        padding: 18px calc(50vw - 155px) 28px;
+      .arch-wheel-stage {
+        height: 465px;
       }
     }
 
-    .highlight-card {
-      flex: 0 0 270px;
-      scroll-snap-align: center;
+    .arch-card {
+      position: absolute;
+      top: 18px;
+      width: 256px;
       background: var(--white);
       border-radius: 22px;
       border: 2px solid var(--border);
       overflow: hidden;
-      box-shadow: 0 10px 24px rgba(13, 74, 51, 0.06);
-      transform: scale(0.95);
-      opacity: 0.84;
-      transition: transform 0.38s var(--spring), opacity 0.35s ease, border-color 0.3s ease, box-shadow 0.38s ease;
-      cursor: pointer;
-      user-select: none;
+      box-shadow: 0 12px 26px rgba(13, 74, 51, 0.08);
+      will-change: transform, opacity;
+      backface-visibility: hidden;
+      transition: border-color 0.25s ease, box-shadow 0.3s ease;
     }
 
     @media (min-width: 768px) {
-      .highlight-card { flex: 0 0 310px; }
+      .arch-card {
+        top: 22px;
+        width: 304px;
+      }
     }
 
-    .highlight-card.is-selected {
-      transform: scale(1);
-      opacity: 1;
+    .arch-card.is-center {
       border-color: var(--green);
-      box-shadow: 0 22px 44px rgba(13, 74, 51, 0.16);
+      box-shadow: 0 24px 48px rgba(13, 74, 51, 0.2);
     }
 
-    .highlight-media {
+    .arch-media {
       position: relative;
       aspect-ratio: 4 / 3;
       background: var(--cream);
       overflow: hidden;
     }
 
-    .highlight-media img {
+    .arch-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
       object-position: center 22%;
       pointer-events: none;
-      transition: transform 0.55s var(--ease);
     }
 
-    .highlight-card.is-selected .highlight-media img {
-      transform: scale(1.03);
-    }
-
-    .highlight-media::after {
+    .arch-media::after {
       content: '';
       position: absolute;
       inset: 0;
@@ -760,14 +756,14 @@
       pointer-events: none;
     }
 
-    .highlight-cat {
+    .arch-cat {
       position: absolute;
-      top: 12px;
-      left: 12px;
+      top: 11px;
+      left: 11px;
       z-index: 2;
       background: rgba(13, 74, 51, 0.92);
       color: var(--white);
-      font-size: 0.65rem;
+      font-size: 0.64rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -775,10 +771,10 @@
       border-radius: 8px;
     }
 
-    .highlight-num {
+    .arch-num {
       position: absolute;
-      top: 12px;
-      right: 12px;
+      top: 11px;
+      right: 11px;
       z-index: 2;
       width: 26px;
       height: 26px;
@@ -791,7 +787,7 @@
       place-items: center;
     }
 
-    .highlight-price {
+    .arch-price {
       position: absolute;
       bottom: 10px;
       right: 13px;
@@ -802,22 +798,22 @@
       line-height: 1;
     }
 
-    .highlight-body {
-      padding: 16px 18px 18px;
+    .arch-body {
+      padding: 15px 17px 17px;
     }
 
-    .highlight-title {
+    .arch-title {
       font-family: var(--font-display);
-      font-size: 1.18rem;
+      font-size: 1.16rem;
       font-weight: 700;
       line-height: 1.22;
       color: var(--green);
-      margin-bottom: 6px;
+      margin-bottom: 5px;
     }
 
-    .highlight-desc {
-      font-size: 0.8rem;
-      line-height: 1.46;
+    .arch-desc {
+      font-size: 0.79rem;
+      line-height: 1.45;
       color: var(--muted);
       display: -webkit-box;
       -webkit-line-clamp: 2;
@@ -826,14 +822,14 @@
       margin-bottom: 10px;
     }
 
-    .highlight-unit {
+    .arch-unit {
       display: block;
-      font-size: 0.73rem;
+      font-size: 0.72rem;
       font-weight: 700;
       color: var(--orange);
     }
 
-    .highlight-dots {
+    .arch-dots {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -841,7 +837,7 @@
       margin-top: 4px;
     }
 
-    .highlight-dot {
+    .arch-dot {
       height: 7px;
       width: 7px;
       border-radius: var(--r-pill);
@@ -851,7 +847,7 @@
       transition: width 0.3s var(--spring), background-color 0.25s ease;
     }
 
-    .highlight-dot.active {
+    .arch-dot.active {
       width: 24px;
       background: var(--green);
     }
@@ -1042,7 +1038,6 @@
       transform: scale(0.98);
     }
 
-    /* Proportional 4:3 Media Frame — Prevents Bottle & Dish Cropping */
     .item-media {
       position: relative;
       aspect-ratio: 4 / 3;
@@ -1884,15 +1879,15 @@
       </div>
     </section>
 
-    <!-- POPULAR PRODUCTS — LEAF CAFE STYLE SILKY SCROLL-SNAP REEL -->
+    <!-- POPULAR PRODUCTS — CONTINUOUS CIRCULAR ARCH LOOP (Bottom-to-Top Arc) -->
     <section class="popular-section" id="popular">
       <div class="popular-header reveal">
         <p class="eyebrow">CUSTOMER FAVORITES</p>
         <h2 class="display-title">Popular Products</h2>
       </div>
 
-      <div class="highlight-reel" id="highlightReel" aria-label="Popular Dairy Products"></div>
-      <div class="highlight-dots" id="highlightDots"></div>
+      <div class="arch-wheel-stage" id="archStage" aria-roledescription="carousel" aria-label="Popular Dairy Products"></div>
+      <div class="arch-dots" id="archDots"></div>
     </section>
 
     <!-- COMPLETE 15-PRODUCT CATALOG (Tap Any Card for Blurred-Background Spotlight) -->
@@ -2454,7 +2449,7 @@
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
       });
-      renderHighlightReel();
+      renderArchWheel();
       renderCatalog();
     }
 
@@ -2463,90 +2458,180 @@
     });
 
     /* ==========================================================================
-       LEAF CAFE STYLE SCROLL-SNAP HIGHLIGHT REEL (Zero Scroll-Listener Lag)
+       CONTINUOUS CIRCULAR ARCH WHEEL (60fps GPU Loop — Bottom-to-Top Arc)
        ========================================================================== */
-    const highlightReel = document.getElementById('highlightReel');
-    const highlightDots = document.getElementById('highlightDots');
-    let reelObserver = null;
+    const archStage = document.getElementById('archStage');
+    const archDots = document.getElementById('archDots');
+    let archCards = [];
+    let dotEls = [];
 
-    function renderHighlightReel() {
-      highlightReel.innerHTML = FEATURED_ITEMS.map((item, idx) => {
+    // Continuous wheel position (float index; wraps seamlessly modulo N)
+    let wheelPos = 2;
+    let wheelVel = 0;
+    let isPointerDown = false;
+    let pointerStartX = 0;
+    let pointerLastX = 0;
+    let pointerMoved = false;
+    let rafId = null;
+
+    function mod(n, m) {
+      return ((n % m) + m) % m;
+    }
+
+    function renderArchWheel() {
+      archStage.innerHTML = FEATURED_ITEMS.map((item, idx) => {
         const price = mode === 'b2b' ? item.b2bPrice : item.retailPrice;
         const unit = mode === 'b2b' ? item.b2bUnit : item.retailUnit;
         const title = lang === 'mr' ? item.nameMr : item.name;
         return `
-          <article class="highlight-card ${idx === 0 ? 'is-selected' : ''}" data-idx="${idx}" data-product-id="${item.id}">
-            <div class="highlight-media">
+          <article class="arch-card" data-idx="${idx}" data-product-id="${item.id}">
+            <div class="arch-media">
               <img src="${item.img}" alt="${title}" width="600" height="450" decoding="async" />
-              <span class="highlight-cat">${item.catLabel}</span>
-              <span class="highlight-num">0${idx + 1}</span>
-              <span class="highlight-price">₹${price}</span>
+              <span class="arch-cat">${item.catLabel}</span>
+              <span class="arch-num">0${idx + 1}</span>
+              <span class="arch-price">₹${price}</span>
             </div>
-            <div class="highlight-body">
-              <h3 class="highlight-title">${title}</h3>
-              <p class="highlight-desc">${item.desc}</p>
-              <span class="highlight-unit">${unit}</span>
+            <div class="arch-body">
+              <h3 class="arch-title">${title}</h3>
+              <p class="arch-desc">${item.desc}</p>
+              <span class="arch-unit">${unit}</span>
             </div>
           </article>
         `;
       }).join('');
 
-      highlightDots.innerHTML = FEATURED_ITEMS.map((_, idx) => `
-        <button type="button" class="highlight-dot ${idx === 0 ? 'active' : ''}" data-dot="${idx}" aria-label="Slide ${idx + 1}"></button>
+      archDots.innerHTML = FEATURED_ITEMS.map((_, idx) => `
+        <button type="button" class="arch-dot" data-dot="${idx}" aria-label="Product ${idx + 1}"></button>
       `).join('');
 
-      const cards = Array.from(highlightReel.querySelectorAll('.highlight-card'));
-      const dots = Array.from(highlightDots.querySelectorAll('.highlight-dot'));
+      archCards = Array.from(archStage.querySelectorAll('.arch-card'));
+      dotEls = Array.from(archDots.querySelectorAll('.arch-dot'));
 
-      if (reelObserver) reelObserver.disconnect();
-
-      reelObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const activeIdx = Number(entry.target.dataset.idx);
-            cards.forEach((c, i) => c.classList.toggle('is-selected', i === activeIdx));
-            dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
-          }
-        });
-      }, {
-        root: highlightReel,
-        threshold: 0.65
-      });
-
-      cards.forEach((card, idx) => {
-        reelObserver.observe(card);
-        card.addEventListener('click', () => {
-          if (!card.classList.contains('is-selected')) {
-            card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
-          } else {
-            openProductSpotlight(card.dataset.productId);
-          }
-        });
-      });
-
-      dots.forEach((dot, idx) => {
+      dotEls.forEach((dot, idx) => {
         dot.addEventListener('click', () => {
-          cards[idx]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          const total = FEATURED_ITEMS.length;
+          let diff = idx - mod(wheelPos, total);
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+          wheelPos += diff;
+          wheelVel = 0;
         });
       });
+
+      paintArchWheel();
     }
 
-    // Desktop click-and-drag support on highlight reel
-    let isDown = false;
-    let startX = 0;
-    let scrollStart = 0;
+    function paintArchWheel() {
+      const total = FEATURED_ITEMS.length;
+      const isDesktop = window.innerWidth >= 768;
+      // Circular wheel radius: cards rise from bottom curve up to center & descend on the other side
+      const radius = isDesktop ? 1050 : 620;
+      const stepDeg = isDesktop ? 18 : 24;
+      const activeIdx = mod(Math.round(wheelPos), total);
 
-    highlightReel.addEventListener('mousedown', (e) => {
-      isDown = true;
-      startX = e.pageX - highlightReel.offsetLeft;
-      scrollStart = highlightReel.scrollLeft;
+      for (let i = 0; i < total; i++) {
+        // Shortest wrapped signed distance (-3 .. +3)
+        let offset = i - mod(wheelPos, total);
+        if (offset > total / 2) offset -= total;
+        if (offset < -total / 2) offset += total;
+
+        const absOff = Math.abs(offset);
+        const angleRad = (offset * stepDeg * Math.PI) / 180;
+
+        // Pure circular arc coordinates: x = R * sin(theta), y = R * (1 - cos(theta))
+        const tx = Math.sin(angleRad) * radius;
+        const ty = (1 - Math.cos(angleRad)) * radius;
+        const rotDeg = offset * (isDesktop ? 11 : 13);
+        const scale = Math.max(0.82, 1 - absOff * 0.065);
+        const opacity = absOff > 2.45 ? 0 : Math.max(0.45, 1 - absOff * 0.22);
+
+        const card = archCards[i];
+        card.style.transform = `translate3d(${tx.toFixed(1)}px, ${ty.toFixed(1)}px, 0) rotate(${rotDeg.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
+        card.style.zIndex = String(30 - Math.round(absOff * 5));
+        card.style.opacity = opacity.toFixed(2);
+        card.style.pointerEvents = absOff > 2.2 ? 'none' : 'auto';
+        card.classList.toggle('is-center', absOff < 0.35);
+      }
+
+      for (let i = 0; i < dotEls.length; i++) {
+        dotEls[i].classList.toggle('active', i === activeIdx);
+      }
+    }
+
+    function tickWheel() {
+      if (!isPointerDown) {
+        // Apply smooth inertia decay
+        wheelPos += wheelVel;
+        wheelVel *= 0.90;
+
+        // Gently spring-lock onto nearest whole card index when velocity settles
+        if (Math.abs(wheelVel) < 0.025) {
+          wheelVel = 0;
+          const target = Math.round(wheelPos);
+          const delta = target - wheelPos;
+          if (Math.abs(delta) > 0.001) {
+            wheelPos += delta * 0.16;
+          } else {
+            wheelPos = target;
+          }
+        }
+      }
+      paintArchWheel();
+      rafId = requestAnimationFrame(tickWheel);
+    }
+
+    // Pointer / Touch Drag Handlers (Zero Scroll Conflict)
+    archStage.addEventListener('pointerdown', (e) => {
+      isPointerDown = true;
+      pointerStartX = e.clientX;
+      pointerLastX = e.clientX;
+      pointerMoved = false;
+      wheelVel = 0;
+      archStage.setPointerCapture(e.pointerId);
     });
-    window.addEventListener('mouseup', () => { isDown = false; });
-    highlightReel.addEventListener('mousemove', (e) => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - highlightReel.offsetLeft;
-      highlightReel.scrollLeft = scrollStart - (x - startX) * 1.3;
+
+    archStage.addEventListener('pointermove', (e) => {
+      if (!isPointerDown) return;
+      const dx = e.clientX - pointerLastX;
+      if (Math.abs(e.clientX - pointerStartX) > 6) {
+        pointerMoved = true;
+      }
+      pointerLastX = e.clientX;
+      const dragSensitivity = window.innerWidth >= 768 ? 310 : 230;
+      const stepDelta = -dx / dragSensitivity;
+      wheelPos += stepDelta;
+      wheelVel = stepDelta * 0.65;
+    });
+
+    archStage.addEventListener('pointerup', (e) => {
+      if (!isPointerDown) return;
+      isPointerDown = false;
+      if (archStage.hasPointerCapture(e.pointerId)) {
+        archStage.releasePointerCapture(e.pointerId);
+      }
+
+      // If user tapped instead of dragging: center side card or open spotlight on center card
+      if (!pointerMoved) {
+        const hitCard = document.elementFromPoint(e.clientX, e.clientY)?.closest('.arch-card');
+        if (hitCard) {
+          const clickedIdx = Number(hitCard.dataset.idx);
+          const total = FEATURED_ITEMS.length;
+          let diff = clickedIdx - mod(wheelPos, total);
+          if (diff > total / 2) diff -= total;
+          if (diff < -total / 2) diff += total;
+
+          if (Math.abs(diff) < 0.35) {
+            openProductSpotlight(hitCard.dataset.productId);
+          } else {
+            wheelPos += diff;
+            wheelVel = 0;
+          }
+        }
+      }
+    });
+
+    archStage.addEventListener('pointercancel', () => {
+      isPointerDown = false;
     });
 
     /* ==========================================================================
@@ -2669,7 +2754,7 @@
         document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         mode = tab.dataset.mode;
-        renderHighlightReel();
+        renderArchWheel();
         renderCatalog();
       });
     });
@@ -2745,7 +2830,8 @@
     });
 
     // Initialize
-    renderHighlightReel();
+    renderArchWheel();
+    tickWheel();
     renderCatalog();
   </script>
 </body>
