@@ -311,7 +311,6 @@
 
     .header-nav a:hover { color: var(--green); }
 
-    /* Language Switcher */
     .lang-toggle {
       display: inline-flex;
       align-items: center;
@@ -341,7 +340,7 @@
     }
 
     /* ==========================================================================
-       HERO SECTION
+       HERO SECTION (Uncropped 4:3 Milk Frame)
        ========================================================================== */
     .hero {
       padding: 20px 0 28px;
@@ -363,8 +362,8 @@
 
     @media (min-width: 860px) {
       .hero-card {
-        grid-template-columns: 1.15fr 0.85fr;
-        min-height: 390px;
+        grid-template-columns: 1.12fr 0.88fr;
+        min-height: 400px;
       }
     }
 
@@ -439,9 +438,16 @@
 
     .hero-visual {
       position: relative;
-      min-height: 230px;
+      aspect-ratio: 4 / 3;
       background: var(--green-deep);
       overflow: hidden;
+    }
+
+    @media (min-width: 860px) {
+      .hero-visual {
+        aspect-ratio: auto;
+        min-height: 100%;
+      }
     }
 
     .hero-visual img {
@@ -450,6 +456,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 20%;
       transition: transform 0.8s var(--ease);
     }
 
@@ -662,105 +669,105 @@
     }
 
     /* ==========================================================================
-       POPULAR PRODUCTS — PURE COMPOSITOR NATIVE TOUCH CAROUSEL (ZERO MOBILE LAG)
+       POPULAR PRODUCTS — LEAF CAFE STYLE SILKY SCROLL-SNAP HIGHLIGHT DECK
+       Zero JS scroll math: native CSS scroll-snap + IntersectionObserver focus
        ========================================================================== */
     .popular-section {
       padding: 32px 0 36px;
-      overflow: hidden;
     }
 
     .popular-header {
       text-align: center;
       max-width: 520px;
-      margin: 0 auto 14px;
+      margin: 0 auto 18px;
       padding: 0 20px;
     }
 
-    .snap-track {
+    .highlight-reel {
       display: flex;
       align-items: stretch;
-      gap: 14px;
+      gap: 16px;
       overflow-x: auto;
-      overflow-y: hidden;
-      overscroll-behavior-x: contain;
+      scroll-snap-type: x mandatory;
+      scroll-behavior: smooth;
       -webkit-overflow-scrolling: touch;
-      padding: 12px 20px 22px;
+      padding: 14px calc(50vw - 135px) 24px;
       scrollbar-width: none;
       cursor: grab;
-      transform: translateZ(0);
     }
 
-    .snap-track:active { cursor: grabbing; }
-    .snap-track::-webkit-scrollbar { display: none; }
+    .highlight-reel:active { cursor: grabbing; }
+    .highlight-reel::-webkit-scrollbar { display: none; }
 
     @media (min-width: 768px) {
-      .snap-track {
-        gap: 28px;
-        scroll-snap-type: x mandatory;
-        padding: 24px calc(50vw - 150px) 38px;
+      .highlight-reel {
+        gap: 24px;
+        padding: 18px calc(50vw - 155px) 28px;
       }
     }
 
-    .snap-card {
-      flex: 0 0 256px;
+    .highlight-card {
+      flex: 0 0 270px;
+      scroll-snap-align: center;
       background: var(--white);
-      border-radius: 20px;
-      border: 1.5px solid var(--border);
+      border-radius: 22px;
+      border: 2px solid var(--border);
       overflow: hidden;
-      box-shadow: 0 8px 20px rgba(13, 74, 51, 0.06);
-      transform: translateZ(0);
-      backface-visibility: hidden;
+      box-shadow: 0 10px 24px rgba(13, 74, 51, 0.06);
+      transform: scale(0.95);
+      opacity: 0.84;
+      transition: transform 0.38s var(--spring), opacity 0.35s ease, border-color 0.3s ease, box-shadow 0.38s ease;
+      cursor: pointer;
       user-select: none;
     }
 
     @media (min-width: 768px) {
-      .snap-card {
-        flex: 0 0 300px;
-        scroll-snap-align: center;
-        transform-origin: 50% 100%;
-        transition: border-color 0.25s ease, box-shadow 0.3s ease;
-        will-change: transform;
-      }
-      .snap-card.is-active {
-        border-color: var(--green);
-        box-shadow: 0 18px 38px rgba(13, 74, 51, 0.16);
-      }
+      .highlight-card { flex: 0 0 310px; }
     }
 
-    .snap-media {
+    .highlight-card.is-selected {
+      transform: scale(1);
+      opacity: 1;
+      border-color: var(--green);
+      box-shadow: 0 22px 44px rgba(13, 74, 51, 0.16);
+    }
+
+    .highlight-media {
       position: relative;
-      height: 170px;
-      background: var(--green-deep);
+      aspect-ratio: 4 / 3;
+      background: var(--cream);
       overflow: hidden;
     }
 
-    @media (min-width: 768px) {
-      .snap-media { height: 204px; }
-    }
-
-    .snap-media img {
+    .highlight-media img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 22%;
       pointer-events: none;
+      transition: transform 0.55s var(--ease);
     }
 
-    .snap-media::after {
+    .highlight-card.is-selected .highlight-media img {
+      transform: scale(1.03);
+    }
+
+    .highlight-media::after {
       content: '';
       position: absolute;
       inset: 0;
-      background: linear-gradient(to top, rgba(8, 50, 34, 0.72) 0%, rgba(8, 50, 34, 0.05) 55%, transparent 100%);
+      background: linear-gradient(to top, rgba(8, 50, 34, 0.68) 0%, rgba(8, 50, 34, 0.04) 52%, transparent 100%);
       pointer-events: none;
     }
 
-    .snap-cat-pill {
+    .highlight-cat {
       position: absolute;
-      top: 11px;
-      left: 11px;
+      top: 12px;
+      left: 12px;
       z-index: 2;
       background: rgba(13, 74, 51, 0.92);
       color: var(--white);
-      font-size: 0.64rem;
+      font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
@@ -768,32 +775,48 @@
       border-radius: 8px;
     }
 
-    .snap-price {
+    .highlight-num {
       position: absolute;
-      bottom: 10px;
+      top: 12px;
       right: 12px;
       z-index: 2;
-      font-size: 1.12rem;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: var(--white);
+      color: var(--green);
+      font-size: 0.72rem;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+
+    .highlight-price {
+      position: absolute;
+      bottom: 10px;
+      right: 13px;
+      z-index: 2;
+      font-size: 1.15rem;
       font-weight: 800;
       color: var(--white);
       line-height: 1;
     }
 
-    .snap-body {
-      padding: 16px 16px 18px;
+    .highlight-body {
+      padding: 16px 18px 18px;
     }
 
-    .snap-title {
+    .highlight-title {
       font-family: var(--font-display);
-      font-size: 1.14rem;
+      font-size: 1.18rem;
       font-weight: 700;
       line-height: 1.22;
       color: var(--green);
       margin-bottom: 6px;
     }
 
-    .snap-desc {
-      font-size: 0.79rem;
+    .highlight-desc {
+      font-size: 0.8rem;
       line-height: 1.46;
       color: var(--muted);
       display: -webkit-box;
@@ -803,14 +826,14 @@
       margin-bottom: 10px;
     }
 
-    .snap-unit {
+    .highlight-unit {
       display: block;
-      font-size: 0.72rem;
+      font-size: 0.73rem;
       font-weight: 700;
       color: var(--orange);
     }
 
-    .snap-dots {
+    .highlight-dots {
       display: flex;
       align-items: center;
       justify-content: center;
@@ -818,7 +841,7 @@
       margin-top: 4px;
     }
 
-    .snap-dot {
+    .highlight-dot {
       height: 7px;
       width: 7px;
       border-radius: var(--r-pill);
@@ -828,13 +851,13 @@
       transition: width 0.3s var(--spring), background-color 0.25s ease;
     }
 
-    .snap-dot.active {
+    .highlight-dot.active {
       width: 24px;
       background: var(--green);
     }
 
     /* ==========================================================================
-       COMPLETE 15-PRODUCT CATALOG
+       COMPLETE 15-PRODUCT CATALOG (Uncropped 4:3 Framing + Tap to Spotlight)
        ========================================================================== */
     .catalog-section {
       padding: 36px 0 48px;
@@ -987,7 +1010,7 @@
     .catalog-grid {
       display: grid;
       grid-template-columns: 1fr;
-      gap: 16px;
+      gap: 18px;
     }
 
     @media (min-width: 580px) {
@@ -995,28 +1018,34 @@
     }
 
     @media (min-width: 940px) {
-      .catalog-grid { grid-template-columns: repeat(3, 1fr); gap: 20px; }
+      .catalog-grid { grid-template-columns: repeat(3, 1fr); gap: 22px; }
     }
 
     .item-card {
       background: var(--white);
-      border: 1px solid var(--border);
+      border: 1.5px solid var(--border);
       border-radius: var(--r-md);
       overflow: hidden;
       display: flex;
       flex-direction: column;
+      cursor: pointer;
       transition: transform 0.28s var(--spring), border-color 0.2s ease, box-shadow 0.28s ease;
     }
 
     .item-card:hover {
       transform: translateY(-4px);
       border-color: var(--green);
-      box-shadow: 0 12px 26px rgba(13, 74, 51, 0.08);
+      box-shadow: 0 14px 28px rgba(13, 74, 51, 0.09);
     }
 
+    .item-card:active {
+      transform: scale(0.98);
+    }
+
+    /* Proportional 4:3 Media Frame — Prevents Bottle & Dish Cropping */
     .item-media {
       position: relative;
-      height: 162px;
+      aspect-ratio: 4 / 3;
       background: var(--cream);
       overflow: hidden;
     }
@@ -1025,6 +1054,7 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      object-position: center 22%;
       transition: transform 0.45s var(--ease);
     }
 
@@ -1034,14 +1064,27 @@
 
     .item-tag {
       position: absolute;
-      top: 10px;
-      left: 10px;
+      top: 11px;
+      left: 11px;
       background: var(--green);
       color: var(--white);
       font-size: 0.68rem;
       font-weight: 700;
       padding: 4px 10px;
       border-radius: 8px;
+    }
+
+    .item-expand-hint {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      background: rgba(255, 255, 255, 0.92);
+      color: var(--green);
+      font-size: 0.68rem;
+      font-weight: 700;
+      padding: 4px 9px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .item-body {
@@ -1054,7 +1097,7 @@
 
     .item-title {
       font-family: var(--font-display);
-      font-size: 1.1rem;
+      font-size: 1.12rem;
       font-weight: 700;
       line-height: 1.22;
       color: var(--green);
@@ -1098,6 +1141,170 @@
       background: var(--green-soft);
       padding: 6px 11px;
       border-radius: 8px;
+    }
+
+    /* ==========================================================================
+       PRODUCT SPOTLIGHT POPUP MODAL (Blurred Background + Focused Product Card)
+       ========================================================================== */
+    .spotlight-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 130;
+      background: rgba(7, 43, 29, 0.55);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      display: none;
+      place-items: center;
+      padding: 18px;
+      overflow-y: auto;
+    }
+
+    .spotlight-backdrop.open {
+      display: grid;
+    }
+
+    .spotlight-card {
+      width: 100%;
+      max-width: 440px;
+      background: var(--white);
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      box-shadow: 0 28px 60px rgba(7, 43, 29, 0.35);
+      border: 2px solid var(--green);
+      animation: spotlightPop 0.32s var(--spring) both;
+      position: relative;
+    }
+
+    @keyframes spotlightPop {
+      from { opacity: 0; transform: scale(0.9) translateY(16px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+
+    .spotlight-close {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 5;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(255, 255, 255, 0.94);
+      color: var(--green);
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.16);
+      transition: transform 0.2s var(--spring), background-color 0.2s ease;
+    }
+
+    .spotlight-close:hover {
+      background: var(--orange);
+      color: var(--white);
+      transform: scale(1.06);
+    }
+
+    .spotlight-media {
+      position: relative;
+      width: 100%;
+      background: var(--cream);
+      max-height: 300px;
+      overflow: hidden;
+    }
+
+    .spotlight-media img {
+      width: 100%;
+      height: 100%;
+      max-height: 300px;
+      object-fit: cover;
+      object-position: center 20%;
+    }
+
+    .spotlight-body {
+      padding: 20px 22px 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .spotlight-kicker {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .spotlight-cat {
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--orange);
+    }
+
+    .spotlight-temp {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--green);
+      background: var(--green-soft);
+      padding: 3px 9px;
+      border-radius: 8px;
+    }
+
+    .spotlight-title {
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--green);
+    }
+
+    .spotlight-mr {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--muted);
+      margin-top: -6px;
+    }
+
+    .spotlight-desc {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--ink);
+    }
+
+    .spotlight-rates {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      background: var(--cream);
+      padding: 12px;
+      border-radius: var(--r-sm);
+      border: 1px solid var(--border);
+    }
+
+    .rate-box span {
+      display: block;
+      font-size: 0.68rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+
+    .rate-box strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--green);
+    }
+
+    .rate-box small {
+      display: block;
+      font-size: 0.71rem;
+      color: var(--muted);
     }
 
     /* ==========================================================================
@@ -1450,7 +1657,8 @@
       inset: 0;
       z-index: 120;
       background: rgba(7, 43, 29, 0.6);
-      backdrop-filter: blur(4px);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       display: none;
       place-items: center;
       padding: 20px;
@@ -1465,12 +1673,7 @@
       border-radius: var(--r-lg);
       padding: 26px 24px;
       box-shadow: 0 24px 48px rgba(0, 0, 0, 0.25);
-      animation: popIn 0.28s var(--spring);
-    }
-
-    @keyframes popIn {
-      from { opacity: 0; transform: scale(0.94) translateY(10px); }
-      to { opacity: 1; transform: scale(1) translateY(0); }
+      animation: spotlightPop 0.28s var(--spring);
     }
 
     .modal-head {
@@ -1681,18 +1884,18 @@
       </div>
     </section>
 
-    <!-- POPULAR PRODUCTS — 60FPS COMPOSITOR TOUCH CAROUSEL -->
+    <!-- POPULAR PRODUCTS — LEAF CAFE STYLE SILKY SCROLL-SNAP REEL -->
     <section class="popular-section" id="popular">
       <div class="popular-header reveal">
         <p class="eyebrow">CUSTOMER FAVORITES</p>
         <h2 class="display-title">Popular Products</h2>
       </div>
 
-      <div class="snap-track" id="snapTrack" aria-label="Popular Dairy Products"></div>
-      <div class="snap-dots" id="snapDots"></div>
+      <div class="highlight-reel" id="highlightReel" aria-label="Popular Dairy Products"></div>
+      <div class="highlight-dots" id="highlightDots"></div>
     </section>
 
-    <!-- COMPLETE 15-PRODUCT CATALOG -->
+    <!-- COMPLETE 15-PRODUCT CATALOG (Tap Any Card for Blurred-Background Spotlight) -->
     <section class="catalog-section" id="catalog">
       <div class="container">
         <div class="catalog-head reveal">
@@ -1901,6 +2104,45 @@
     </div>
   </footer>
 
+  <!-- PRODUCT SPOTLIGHT POPUP MODAL (Blurred Backdrop + Focused Card) -->
+  <div class="spotlight-backdrop" id="spotlightModal">
+    <div class="spotlight-card" role="dialog" aria-modal="true" aria-labelledby="spotlightTitle">
+      <button type="button" class="spotlight-close" id="closeSpotlightBtn" aria-label="Close product details">✕</button>
+      <div class="spotlight-media">
+        <img id="spotlightImg" src="" alt="" />
+      </div>
+      <div class="spotlight-body">
+        <div class="spotlight-kicker">
+          <span class="spotlight-cat" id="spotlightCat"></span>
+          <span class="spotlight-temp" id="spotlightTemp">4°C Cold-Chained</span>
+        </div>
+        <h3 class="spotlight-title" id="spotlightTitle"></h3>
+        <p class="spotlight-mr" id="spotlightMr"></p>
+        <p class="spotlight-desc" id="spotlightDesc"></p>
+
+        <div class="spotlight-rates">
+          <div class="rate-box">
+            <span>B2B Wholesale</span>
+            <strong id="spotlightB2bPrice"></strong>
+            <small id="spotlightB2bUnit"></small>
+          </div>
+          <div class="rate-box">
+            <span>Walk-In Counter</span>
+            <strong id="spotlightRetailPrice"></strong>
+            <small id="spotlightRetailUnit"></small>
+          </div>
+        </div>
+
+        <a id="spotlightWaLink" href="#" target="_blank" rel="noopener" class="btn btn-primary" style="width: 100%;">
+          <span>Inquire About This Product on WhatsApp</span>
+          <svg class="slide" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+
   <!-- FREE B2B SAMPLE REQUEST MODAL -->
   <div class="modal-backdrop" id="sampleModal">
     <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="sampleModalTitle">
@@ -1985,7 +2227,7 @@
     };
 
     /* ==========================================================================
-       ALL 15 PRODUCTS — WIRED TO LOWERCASE .WEBP FILENAMES
+       ALL 15 PRODUCTS
        ========================================================================== */
     const PRODUCTS = [
       {
@@ -1993,9 +2235,10 @@
         featured: true,
         category: 'cultured',
         catLabel: 'THANDGAR DRINKS',
+        temp: '2°C Ice-Chilled',
         name: 'Thandgar Thick Lassi',
         nameMr: 'थंडगार लस्सी',
-        desc: 'Chilled, creamy Pune-style sweet lassi churned fresh from malai curd.',
+        desc: 'Chilled, creamy Pune-style sweet lassi churned fresh from malai curd with zero preservatives.',
         b2bPrice: 20, b2bUnit: 'per 250ml (Crate of 24)',
         retailPrice: 30, retailUnit: '250ml Chilled Bottle',
         img: 'thandgar-lassi.webp'
@@ -2005,9 +2248,10 @@
         featured: true,
         category: 'sweets',
         catLabel: 'FRESH PANEER',
+        temp: '4°C Fresh Pressed',
         name: 'Fresh Malai Paneer',
         nameMr: 'मलाई पनीर',
-        desc: 'Ultra-soft, high-yield malai paneer pressed every morning for hotels & homes.',
+        desc: 'Ultra-soft, high-yield malai paneer pressed every morning for hotels, caterers & homes.',
         b2bPrice: 340, b2bUnit: 'per kg (5kg Bulk Slab)',
         retailPrice: 95, retailUnit: '250g Fresh Pack',
         img: 'malai-paneer.webp'
@@ -2017,6 +2261,7 @@
         featured: true,
         category: 'cultured',
         catLabel: 'CULTURED DAIRY',
+        temp: '4°C Probiotic Set',
         name: 'Thick Malai Dahi',
         nameMr: 'मलाई दही',
         desc: 'Rich, creamy set curd with a thick malai layer and zero water separation.',
@@ -2029,9 +2274,10 @@
         featured: true,
         category: 'sweets',
         catLabel: 'TRADITIONAL SWEETS',
+        temp: '4°C Chilled',
         name: 'Ratnagiri Amrakhand',
         nameMr: 'आम्रखंड',
-        desc: 'Velvety strained chakka blended with real Alphonso mango pulp.',
+        desc: 'Velvety strained chakka blended with real Alphonso mango pulp for festive & daily dining.',
         b2bPrice: 250, b2bUnit: 'per kg (Bulk Tub)',
         retailPrice: 140, retailUnit: '500g Family Tub',
         img: 'amrakhand.webp'
@@ -2041,9 +2287,10 @@
         featured: true,
         category: 'cultured',
         catLabel: 'THANDGAR DRINKS',
+        temp: '2°C Ice-Chilled',
         name: 'Spiced Masala Taak',
         nameMr: 'मसाला ताक',
-        desc: 'Refreshing roasted jeera & ginger buttermilk—ideal for meals and events.',
+        desc: 'Refreshing roasted jeera & ginger buttermilk—ideal for meals, thalis, and events.',
         b2bPrice: 14, b2bUnit: 'per 200ml (Crate of 24)',
         retailPrice: 20, retailUnit: '250ml Chilled Pack',
         img: 'masala-taak.webp'
@@ -2053,6 +2300,7 @@
         featured: true,
         category: 'cultured',
         catLabel: 'CHILLED BEVERAGE',
+        temp: '2°C Ice-Chilled',
         name: 'Thick Cold Coffee',
         nameMr: 'कोल्ड कॉफी',
         desc: 'Rich café-style chilled coffee blended with full-cream Vedganga milk.',
@@ -2065,6 +2313,7 @@
         featured: false,
         category: 'milk',
         catLabel: 'PURE GHEE',
+        temp: '100% Pure Danedar',
         name: 'Gavran Pure Desi Ghee',
         nameMr: 'गावरान तूप',
         desc: 'Aromatic golden granular ghee simmered slowly from pure butter cream.',
@@ -2077,6 +2326,7 @@
         featured: false,
         category: 'sweets',
         catLabel: 'HALWAI SPECIAL',
+        temp: '4°C Fresh Batch',
         name: 'Fresh Mithai Khawa / Mawa',
         nameMr: 'शुद्ध खवा (मावा)',
         desc: 'Pure, slow-reduced milk mawa crafted for pedha, gulab jamun & barfi makers.',
@@ -2089,6 +2339,7 @@
         featured: false,
         category: 'sweets',
         catLabel: 'TRADITIONAL SWEETS',
+        temp: '4°C Chilled',
         name: 'Kesar Elaichi Basundi',
         nameMr: 'बासुंदी',
         desc: 'Slow-simmered thickened milk delicately flavored with cardamom, saffron & nuts.',
@@ -2101,6 +2352,7 @@
         featured: false,
         category: 'sweets',
         catLabel: 'TRADITIONAL SWEETS',
+        temp: '4°C Chilled',
         name: 'Kesar Elaichi Shrikhand',
         nameMr: 'केसर श्रीखंड',
         desc: 'Smooth, creamy strained curd dessert infused with saffron and nutmeg.',
@@ -2113,9 +2365,10 @@
         featured: false,
         category: 'frozen',
         catLabel: 'COLD STORAGE',
+        temp: '-18°C Cold-Stored',
         name: 'Chilled Green Peas (Matar)',
         nameMr: 'ग्रीन पीस (मटार)',
-        desc: 'Tender, sweet green peas preserved in our 4°C–0°C cold chain for restaurants.',
+        desc: 'Tender, sweet green peas preserved in our cold chain for restaurants & caterers.',
         b2bPrice: 95, b2bUnit: 'per kg (5kg Bag)',
         retailPrice: 110, retailUnit: '1kg Pack',
         img: 'chilled-green-peas.webp'
@@ -2125,6 +2378,7 @@
         featured: false,
         category: 'milk',
         catLabel: 'DAIRY CREAM',
+        temp: '4°C Chilled',
         name: 'Fresh Dairy Cream (Malai)',
         nameMr: 'क्रिम (तुपासाठी व कुकिंग)',
         desc: 'High-fat fresh dairy cream for ghee making, makhani gravies, and bakeries.',
@@ -2137,6 +2391,7 @@
         featured: false,
         category: 'frozen',
         catLabel: 'FROZEN DESSERTS',
+        temp: '-18°C Frozen',
         name: 'Rangeela Ice Cream',
         nameMr: 'रंगीला आईस्क्रीम',
         desc: 'Rich dairy ice cream tubs and family packs for celebrations and retail counters.',
@@ -2149,6 +2404,7 @@
         featured: false,
         category: 'frozen',
         catLabel: 'FROZEN DESSERTS',
+        temp: '-18°C Frozen',
         name: 'Traditional Malai Kulfi',
         nameMr: 'मलाई कुल्फी',
         desc: 'Dense, slow-frozen mawa & pista kulfi sticks—a local Hadapsar favorite.',
@@ -2161,6 +2417,7 @@
         featured: false,
         category: 'milk',
         catLabel: 'DAILY MILK',
+        temp: '4°C Lab-Tested',
         name: 'Full-Cream Buffalo & Cow Milk',
         nameMr: 'ताजे गाई व म्हशीचे दूध',
         desc: 'Lab-tested 4°C chilled milk dispatched every morning at 5:00 AM across Hadapsar.',
@@ -2197,7 +2454,7 @@
       document.querySelectorAll('.lang-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.lang === lang);
       });
-      renderSnapCarousel();
+      renderHighlightReel();
       renderCatalog();
     }
 
@@ -2206,157 +2463,94 @@
     });
 
     /* ==========================================================================
-       60FPS COMPOSITOR CAROUSEL (Native Touch Momentum on Mobile + Fan on Desktop)
+       LEAF CAFE STYLE SCROLL-SNAP HIGHLIGHT REEL (Zero Scroll-Listener Lag)
        ========================================================================== */
-    const snapTrack = document.getElementById('snapTrack');
-    const snapDots = document.getElementById('snapDots');
-    let snapCards = [];
-    let cardCenters = [];
-    let trackHalfWidth = 0;
-    let cardSpan = 328;
-    let ticking = false;
+    const highlightReel = document.getElementById('highlightReel');
+    const highlightDots = document.getElementById('highlightDots');
+    let reelObserver = null;
 
-    function renderSnapCarousel() {
-      snapTrack.innerHTML = FEATURED_ITEMS.map((item, idx) => {
+    function renderHighlightReel() {
+      highlightReel.innerHTML = FEATURED_ITEMS.map((item, idx) => {
         const price = mode === 'b2b' ? item.b2bPrice : item.retailPrice;
         const unit = mode === 'b2b' ? item.b2bUnit : item.retailUnit;
         const title = lang === 'mr' ? item.nameMr : item.name;
         return `
-          <article class="snap-card" data-idx="${idx}">
-            <div class="snap-media">
-              <img src="${item.img}" alt="${title}" width="600" height="420" decoding="async" />
-              <span class="snap-cat-pill">${item.catLabel}</span>
-              <span class="snap-price">₹${price}</span>
+          <article class="highlight-card ${idx === 0 ? 'is-selected' : ''}" data-idx="${idx}" data-product-id="${item.id}">
+            <div class="highlight-media">
+              <img src="${item.img}" alt="${title}" width="600" height="450" decoding="async" />
+              <span class="highlight-cat">${item.catLabel}</span>
+              <span class="highlight-num">0${idx + 1}</span>
+              <span class="highlight-price">₹${price}</span>
             </div>
-            <div class="snap-body">
-              <h3 class="snap-title">${title}</h3>
-              <p class="snap-desc">${item.desc}</p>
-              <span class="snap-unit">${unit}</span>
+            <div class="highlight-body">
+              <h3 class="highlight-title">${title}</h3>
+              <p class="highlight-desc">${item.desc}</p>
+              <span class="highlight-unit">${unit}</span>
             </div>
           </article>
         `;
       }).join('');
 
-      snapDots.innerHTML = FEATURED_ITEMS.map((_, idx) => `
-        <button type="button" class="snap-dot" data-dot="${idx}" aria-label="Slide ${idx + 1}"></button>
+      highlightDots.innerHTML = FEATURED_ITEMS.map((_, idx) => `
+        <button type="button" class="highlight-dot ${idx === 0 ? 'active' : ''}" data-dot="${idx}" aria-label="Slide ${idx + 1}"></button>
       `).join('');
 
-      snapCards = Array.from(snapTrack.querySelectorAll('.snap-card'));
+      const cards = Array.from(highlightReel.querySelectorAll('.highlight-card'));
+      const dots = Array.from(highlightDots.querySelectorAll('.highlight-dot'));
 
-      requestAnimationFrame(() => {
-        measureCarousel();
-        if (window.innerWidth >= 768 && cardCenters[1] !== undefined) {
-          snapTrack.scrollLeft = cardCenters[1] - trackHalfWidth;
-        }
-        updateCarouselVisuals();
+      if (reelObserver) reelObserver.disconnect();
+
+      reelObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const activeIdx = Number(entry.target.dataset.idx);
+            cards.forEach((c, i) => c.classList.toggle('is-selected', i === activeIdx));
+            dots.forEach((d, i) => d.classList.toggle('active', i === activeIdx));
+          }
+        });
+      }, {
+        root: highlightReel,
+        threshold: 0.65
       });
 
-      snapCards.forEach((card, idx) => {
+      cards.forEach((card, idx) => {
+        reelObserver.observe(card);
         card.addEventListener('click', () => {
-          if (cardCenters[idx] !== undefined) {
-            snapTrack.scrollTo({ left: cardCenters[idx] - trackHalfWidth, behavior: 'smooth' });
+          if (!card.classList.contains('is-selected')) {
+            card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+          } else {
+            openProductSpotlight(card.dataset.productId);
           }
         });
       });
 
-      snapDots.querySelectorAll('.snap-dot').forEach((dot, idx) => {
+      dots.forEach((dot, idx) => {
         dot.addEventListener('click', () => {
-          if (cardCenters[idx] !== undefined) {
-            snapTrack.scrollTo({ left: cardCenters[idx] - trackHalfWidth, behavior: 'smooth' });
-          }
+          cards[idx]?.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
         });
       });
     }
 
-    function measureCarousel() {
-      trackHalfWidth = snapTrack.clientWidth / 2;
-      const isDesktop = window.innerWidth >= 768;
-      cardSpan = (snapCards[0]?.offsetWidth || (isDesktop ? 300 : 256)) + (isDesktop ? 28 : 14);
-      cardCenters = snapCards.map(card => card.offsetLeft + card.offsetWidth / 2);
-    }
-
-    function updateCarouselVisuals() {
-      const isDesktop = window.innerWidth >= 768;
-      const center = snapTrack.scrollLeft + trackHalfWidth;
-      let activeIdx = 0;
-      let minDist = Infinity;
-
-      for (let i = 0; i < snapCards.length; i++) {
-        const dist = cardCenters[i] - center;
-        const absDist = Math.abs(dist);
-        if (absDist < minDist) {
-          minDist = absDist;
-          activeIdx = i;
-        }
-
-        if (isDesktop) {
-          const norm = Math.max(-2.2, Math.min(2.2, dist / cardSpan));
-          const absNorm = Math.abs(norm);
-          const ty = (absNorm * absNorm) * 14;
-          const rot = norm * 6.5;
-          const scale = Math.max(0.88, 1 - absNorm * 0.06);
-          snapCards[i].style.transform = `translate3d(0, ${ty.toFixed(1)}px, 0) rotate(${rot.toFixed(2)}deg) scale(${scale.toFixed(3)})`;
-          snapCards[i].classList.toggle('is-active', absDist < cardSpan * 0.45);
-        } else {
-          // On mobile: zero JS transform mutations during touch scroll for pure native 60fps glide
-          if (snapCards[i].style.transform) {
-            snapCards[i].style.transform = '';
-          }
-        }
-      }
-
-      snapDots.querySelectorAll('.snap-dot').forEach((d, idx) => {
-        d.classList.toggle('active', idx === activeIdx);
-      });
-      ticking = false;
-    }
-
-    snapTrack.addEventListener('scroll', () => {
-      if (!ticking) {
-        requestAnimationFrame(updateCarouselVisuals);
-        ticking = true;
-      }
-    }, { passive: true });
-
-    // Desktop mouse drag support
+    // Desktop click-and-drag support on highlight reel
     let isDown = false;
     let startX = 0;
     let scrollStart = 0;
 
-    snapTrack.addEventListener('mousedown', (e) => {
+    highlightReel.addEventListener('mousedown', (e) => {
       isDown = true;
-      startX = e.pageX - snapTrack.offsetLeft;
-      scrollStart = snapTrack.scrollLeft;
+      startX = e.pageX - highlightReel.offsetLeft;
+      scrollStart = highlightReel.scrollLeft;
     });
     window.addEventListener('mouseup', () => { isDown = false; });
-    snapTrack.addEventListener('mousemove', (e) => {
+    highlightReel.addEventListener('mousemove', (e) => {
       if (!isDown) return;
       e.preventDefault();
-      const x = e.pageX - snapTrack.offsetLeft;
-      snapTrack.scrollLeft = scrollStart - (x - startX) * 1.4;
-    });
-
-    window.addEventListener('resize', () => {
-      measureCarousel();
-      updateCarouselVisuals();
+      const x = e.pageX - highlightReel.offsetLeft;
+      highlightReel.scrollLeft = scrollStart - (x - startX) * 1.3;
     });
 
     /* ==========================================================================
-       SCROLL REVEAL OBSERVER
-       ========================================================================== */
-    const revealObserver = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          revealObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12 });
-
-    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-    /* ==========================================================================
-       COMPLETE 15-ITEM CATALOG RENDERER
+       COMPLETE 15-PRODUCT CATALOG RENDERER (Tap Any Card to Spotlight)
        ========================================================================== */
     const catalogGrid = document.getElementById('catalogGrid');
     const searchInput = document.getElementById('searchInput');
@@ -2378,16 +2572,19 @@
         ? (lang === 'mr' ? 'होलसेल उपलब्ध' : 'Bulk Supply')
         : (lang === 'mr' ? 'काउंटरवर उपलब्ध' : 'Walk-In Ready');
 
+      const hintText = lang === 'mr' ? 'माहिती पहा' : 'Tap for details';
+
       catalogGrid.innerHTML = filtered.map(p => {
         const price = mode === 'b2b' ? p.b2bPrice : p.retailPrice;
         const unit = mode === 'b2b' ? p.b2bUnit : p.retailUnit;
         const title = lang === 'mr' ? p.nameMr : p.name;
 
         return `
-          <article class="item-card">
+          <article class="item-card" data-product-id="${p.id}" tabindex="0" role="button" aria-label="View details for ${title}">
             <div class="item-media">
-              <img src="${p.img}" alt="${title}" loading="lazy" width="600" height="400" />
+              <img src="${p.img}" alt="${title}" loading="lazy" width="600" height="450" />
               <span class="item-tag">${p.catLabel}</span>
+              <span class="item-expand-hint">${hintText}</span>
             </div>
             <div class="item-body">
               <h3 class="item-title">${title}</h3>
@@ -2405,12 +2602,74 @@
       }).join('');
     }
 
+    /* ==========================================================================
+       PRODUCT SPOTLIGHT POPUP MODAL (Blurred Background + Focused Card)
+       ========================================================================== */
+    const spotlightModal = document.getElementById('spotlightModal');
+    const closeSpotlightBtn = document.getElementById('closeSpotlightBtn');
+
+    function openProductSpotlight(productId) {
+      const p = PRODUCTS.find(item => item.id === productId);
+      if (!p) return;
+
+      document.getElementById('spotlightImg').src = p.img;
+      document.getElementById('spotlightImg').alt = p.name;
+      document.getElementById('spotlightCat').textContent = p.catLabel;
+      document.getElementById('spotlightTemp').textContent = p.temp;
+      document.getElementById('spotlightTitle').textContent = p.name;
+      document.getElementById('spotlightMr').textContent = p.nameMr;
+      document.getElementById('spotlightDesc').textContent = p.desc;
+      document.getElementById('spotlightB2bPrice').textContent = `₹${p.b2bPrice}`;
+      document.getElementById('spotlightB2bUnit').textContent = p.b2bUnit;
+      document.getElementById('spotlightRetailPrice').textContent = `₹${p.retailPrice}`;
+      document.getElementById('spotlightRetailUnit').textContent = p.retailUnit;
+
+      const waText = encodeURIComponent(`Hello Vedganga Milk & Milk Products, I would like to know more about *${p.name}* (${p.nameMr}).`);
+      document.getElementById('spotlightWaLink').href = `https://wa.me/919552548733?text=${waText}`;
+
+      spotlightModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeProductSpotlight() {
+      spotlightModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    catalogGrid.addEventListener('click', (e) => {
+      const card = e.target.closest('.item-card');
+      if (card) openProductSpotlight(card.dataset.productId);
+    });
+
+    catalogGrid.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        const card = e.target.closest('.item-card');
+        if (card) {
+          e.preventDefault();
+          openProductSpotlight(card.dataset.productId);
+        }
+      }
+    });
+
+    closeSpotlightBtn.addEventListener('click', closeProductSpotlight);
+    spotlightModal.addEventListener('click', (e) => {
+      if (e.target === spotlightModal) closeProductSpotlight();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && spotlightModal.classList.contains('open')) {
+        closeProductSpotlight();
+      }
+    });
+
+    /* ==========================================================================
+       FILTERS, SEARCH & SAMPLE MODAL
+       ========================================================================== */
     document.querySelectorAll('.mode-tab').forEach(tab => {
       tab.addEventListener('click', () => {
         document.querySelectorAll('.mode-tab').forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
         mode = tab.dataset.mode;
-        renderSnapCarousel();
+        renderHighlightReel();
         renderCatalog();
       });
     });
@@ -2437,15 +2696,29 @@
       renderCatalog();
     });
 
-    /* ==========================================================================
-       REQUEST FREE B2B SAMPLE MODAL
-       ========================================================================== */
+    // Scroll Reveal Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // Free B2B Sample Modal
     const sampleModal = document.getElementById('sampleModal');
     const openSample = (e) => {
       if (e) e.preventDefault();
       sampleModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
     };
-    const closeSample = () => sampleModal.classList.remove('open');
+    const closeSample = () => {
+      sampleModal.classList.remove('open');
+      document.body.style.overflow = '';
+    };
 
     document.getElementById('heroSampleBtn').addEventListener('click', openSample);
     document.getElementById('visitSampleBtn').addEventListener('click', openSample);
@@ -2472,7 +2745,7 @@
     });
 
     // Initialize
-    renderSnapCarousel();
+    renderHighlightReel();
     renderCatalog();
   </script>
 </body>
